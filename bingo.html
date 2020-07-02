@@ -1,0 +1,1276 @@
+<!doctype html>
+<html class="no-js" lang="zh-TW">
+
+<head>
+
+    <!-- meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+
+    <script src="Assets/js/jquery-2.1.3.min.js"></script>
+    <script src="Assets/js/jquery-ui-min.js"></script>
+
+    <link rel="stylesheet" href="Assets/css/iziModal.css">
+    <script src="Assets/js/iziModal.js"></script>
+
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="Assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="Assets/favicon-32x32.png" sizes="32x32">
+    <link rel="icon" type="image/png" href="Assets/favicon-16x16.png" sizes="16x16">
+    <link rel="mask-icon" href="Assets/safari-pinned-tab.svg" color="#0288d1">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="Assets/Gold/css/vendor.min.css">
+    <link rel="stylesheet" href="Assets/Gold/css/elephant.min.css?v=1.2">
+    <link rel="stylesheet" href="Assets/Gold/css/landing-page.min.css">
+    <link rel="stylesheet" href="Assets/Gold/css/demo.min.css?v=1.1">
+    <link rel="stylesheet" href="Assets/Gold/css/application.min.css">
+    <link rel="stylesheet" href="Assets/Gold/css/Lang/zh-CHT/addon.css?v=3.7">
+    <link rel="stylesheet" href="Assets/Gold/css/addon.css?v=1.4">
+    <link rel="stylesheet" href="Assets/Gold/css/downloadbox.css">
+    <script type="text/javascript" src="Assets/js/formvalidation.js"></script>
+
+
+    <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.2/TweenMax.min.js"></script>
+    <script type="text/javascript">
+        var iAlert = 0;
+
+        function getLanguage() {
+            var lang = document.getElementById("demo-select2-4").value;
+            var data = JSON.stringify({
+                obj: {
+                    language: lang,
+                }
+            });
+            $.ajax({
+                url: 'index.aspx/GetLanguage',
+                type: 'POST',
+                contentType: 'application/json',
+                data: data,
+                success: function(result) {
+
+                },
+                error: function(msg) {
+
+                }
+            });
+            location.reload();
+            return false;
+        };
+
+        function showLoading() {
+            var x = document.getElementById('loaderRefresh');
+            x.style.display = 'block';
+        }
+
+        function closeLoading(isRefresh) {
+            var x = document.getElementById('loaderRefresh');
+            x.style.display = 'none';
+
+            //if (isRefresh == '1')
+            //var el = document.getElementById("creditPanel").contentWindow.chgIcon('0');
+        }
+
+        function openContact(link) {
+            window.open(link, 'popup_window', '')
+        }
+
+        (function($) {
+            $(document).ready(function() {
+                var maintenance_replaced = $('.dlbox').html().replace(/OB Sport/gi, '任你博體育');
+                $('.dlbox').html(maintenance_replaced);
+
+                var hostname = window.location.hostname;
+                if (hostname.indexOf('567xx.net') > -1) {
+                    $('.dlbox01 .contacts').each(function() {
+                        var text = $(this).text();
+                        $(this).text(text.replace('@999xc', '555xx'));
+                    });
+                    $('.dlbox01 .cws').each(function() {
+                        var text = $(this).text();
+                        $(this).text(text.replace('love999xc ', '555xx'));
+                    });
+                    $('.dlboxtable01 .lineqr').hide();
+                    $('head').append('<meta name="robots" content="index, nofollow" />');
+                }
+                $('#modalAnnouncement').iziModal();
+
+                $('#div_test').click(function() {
+                    var maxWidth = 650;
+                    var screenWidth = $(window).width();
+                    if (screenWidth > maxWidth)
+                        screenWidth = screenWidth * 0.6;
+                    else
+                        screenWidth = screenWidth * 0.8;
+                    //var width = $(window).width() * 0.5;
+                    //toggle_visibility($(this));
+                    var target = $(this).attr('target');
+                    var html = $('#' + target).html();
+                    $('#modalAnnouncement').iziModal('setTop', 200);
+                    $('#modalAnnouncement').iziModal('setBottom', 5);
+                    $('#modalAnnouncement').iziModal('setWidth', screenWidth);
+                    $('#modalAnnouncement').iziModal('setOverlayClose', false);
+                    $('#modalAnnouncement').iziModal('open', {
+                        overlayColor: "black",
+                        transitionIn: "bounceInDown",
+                    });
+                    $('#modalAnnouncement').iziModal('setContent', html);
+                    $('.iziModal-overlay').css("background-color", "rgba(212, 212, 212, 0.5)");
+                });
+            });
+        })(jQuery);
+
+        var playersession = 'UserDetails';
+
+        if (playersession == "on") {
+            //function refreshMainWallet() {
+            //    setTimeout(function () {
+            //        refreshMainWallet();
+            //        refreshWallet("1");
+            //    }, 2000);
+            //}
+        }
+
+
+
+        function CheckPlayerSession() {
+            $.ajax({
+                url: "../func.aspx/playersession_ping",
+                type: "GET",
+                cache: false,
+                async: true,
+                contentType: "application/json",
+                datatype: "JSON",
+                success: function(result) {
+                    if (result.d.Data != "" && result.d.Data != null) {
+                        switch (result.d.Data) {
+                            case "SessionExpired":
+                            case "PlayerSessionNotFound":
+                                window.PLAYER_SESSION = 0;
+                                //alert('賬號未登入！');
+                                //CloseGamePopup();
+                                window.location.href = "../../Default.aspx";
+                                break;
+                            default:
+                                window.PLAYER_SESSION = 1;
+                                break;
+                        }
+                    }
+
+                },
+            });
+            setTimeout(function() {
+                CheckPlayerSession();
+            }, 5000);
+        }
+    </script>
+
+
+    <style>
+        .font01width {
+            width: 80px !important;
+        }
+
+        table {
+            background-color: #000000 !important;
+        }
+
+        .dlicon01:hover {
+            background-color: #33a9ca;
+            color: white;
+        }
+
+
+        #modalAnnouncement {
+            background: linear-gradient(to top, #0b2351 0%, #1a4b7f 50%, #0b2351 100%);
+            border-radius: 10px !important;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+
+        }
+
+        #modalAnnouncement .iziModal-header {
+            background: linear-gradient(to top, #375EAA 0%, #324F6F 50%, #273246 100%) !important;
+        }
+
+        #modalAnnouncement .iziModal-header-title {
+            font-size: 24px !important;
+            font-weight: 600 !important;
+            color: #FEE5E2 !important
+        }
+
+        #modalAnnouncement img {
+            border-radius: 10px !important;
+        }
+
+        #modalAnnouncement span,
+        #modalAnnouncement li {
+            font-weight: normal !important;
+            color: white !important;
+            font-size: 12px !important;
+        }
+
+        #modalAnnouncement strong,
+        #modalAnnouncement b {
+            font-weight: normal;
+            color: yellow;
+            font-size: 12px;
+        }
+
+        #modalAnnouncement::after {
+            clear: both;
+        }
+
+        .schecked {
+            color: orange !important;
+        }
+
+        .fa-star {
+            font-size: 12px !important;
+            color: white;
+        }
+
+        .footer-top {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .footer-top a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loaderRefresh" class="loading" style="z-index: 999999999999;"></div>
+    <!--header s-->
+    <div class="row mytopbg07">
+        <div class="mycontainer mycontainer02">
+            <!--logo-->
+            <div class="mainlogo">
+                <a class="" href="index.html">
+                    <img class="mainlogosize" alt="任你博娛樂城-卡利百家樂" src="Assets/img/rennibo-logo/rennibologo.png"></a>
+            </div>
+            <!--right manu-->
+            <div class="row row2">
+                <div class="myloginwidth">
+                    <div class="">
+
+                        <div style="float:right;">
+                            <a href="App.html"><span id="lblApp" class="welcometitle1 font01width">APP 下載</span></a>
+                            <a href="FAQ.html"><span id="lblFAQ" class="welcometitle1 font01width">常見問題</span></a>
+
+                        </div>
+
+
+                        <!--language bag-->
+
+                        <!--form-->
+
+
+
+                        <div class="myaccountinfo">
+                            <div id="star_div" style="float:left;width:100px;height:30px">
+                                <span id="star_1" style="margin-top:10px;" class="fa fa-star schecked"></span>
+                                <span id="star_2" style="margin-top:10px;" class="fa fa-star"></span>
+                                <span id="star_3" style="margin-top:10px;" class="fa fa-star"></span>
+                                <span id="star_4" style="margin-top:10px;" class="fa fa-star"></span>
+                                <span id="star_5" style="margin-top:10px;" class="fa fa-star"></span>
+                                <span id="star_6" style="margin-top:10px;" class="fa fa-star"></span>
+                            </div>
+                            <span id="lblWelcome" class="welcometitle1">歡迎, sup0001</span>
+
+
+                            <button id="btnLogout" type="submit" class="mysignin myfloatright mymarginleft5" style="float: left" onclick="location.href='../Logout.html';">登出</button>
+                            <button type="submit" class="mysignin myfloatright mymarginleft5" style="float: left; margin-left: 5px;" onclick="location.href='../myprofile.html';">主錢包</button>
+
+                        </div>
+
+                    </div>
+                    <!--demo-form-wrapper-->
+                </div>
+                <!--myloginwidth-->
+                <!--manu-->
+                <div class="myfloatright margintop10">
+                    <div>
+                        <ul class="mynewmenu">
+
+                            <li><a href="livecasino.html" class="mytopmenu">
+                                    <div id="oc02">
+                                        <div id="ic02"></div>
+                                        <p style="margin-top: 10px">真人百家樂</p>
+                                    </div>
+                                </a></li>
+                            <li><a href="sportsbook.html" class="mytopmenu">
+                                    <div id="oc01">
+                                        <div id="ic01"></div>
+                                        <p style="margin-top: 10px">體育博彩</p>
+                                    </div>
+                                </a></li>
+                            <li><a href="card.html" class="mytopmenu">
+                                    <div id="oc16">
+                                        <div id="ic16"></div>
+                                        <p style="margin-top: 10px">棋牌</p>
+                                    </div>
+                                </a></li>
+
+                            <li><a href="slotgame.html" class="mytopmenu">
+                                    <div id="oc03">
+                                        <div id="ic03"></div>
+                                        <p style="margin-top: 10px">電子遊戲</p>
+                                    </div>
+                                </a></li>
+
+                            <li><a href="lottery.html" class="mytopmenu">
+                                    <div id="oc06">
+                                        <div id="ic06"></div>
+                                        <p style="margin-top: 10px">賓果彩票</p>
+                                    </div>
+                                </a></li>
+                            <li><a href="arcade.html" class="mytopmenu">
+                                    <div id="oc15">
+                                        <div id="ic15"></div>
+                                        <p style="margin-top: 10px">捕魚王</p>
+                                    </div>
+                                </a></li>
+                            <li><a href="esports.html" class="mytopmenu">
+                                    <div id="oc17">
+                                        <div id="ic17"></div>
+                                        <p style="margin-top: 10px">電競</p>
+                                    </div>
+                                </a></li>
+
+
+                            <li><a href="myprofile.html" class="mytopmenu">
+                                    <div id="oc09">
+                                        <div id="ic09"></div>
+                                        <p style="margin-top: 10px">電子錢包</p>
+                                    </div>
+                                </a></li>
+                            <li><a href="referral.html" class="mytopmenu">
+                                    <div id="oc11">
+                                        <div id="ic11"></div>
+                                        <p style="margin-top: 10px">推薦</p>
+                                    </div>
+                                </a></li>
+
+                            <li><a href="promotion.html" class="mytopmenu">
+                                    <div id="oc12">
+                                        <div id="ic12"></div>
+                                        <p style="margin-top: 10px">優惠說明</p>
+                                    </div>
+                                </a>
+                            </li>
+                            <li><a href="streaming.html" class="mytopmenu">
+                                    <div id="oc13">
+                                        <div id="ic13"></div>
+                                        <p style="margin-top: 10px">賽事影城</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--row-->
+        </div>
+        <!--mycontainer-->
+    </div>
+    <!--row mytopbg07-->
+    <!--header e-->
+
+    <!--dowmload title-->
+    <div class="dlbox" id="mainTitle" style="display: block;">
+        <table class="dlboxtable" cellspacing="0" cellpadding="0" style="background-color: #ff000000 !important;">
+            <tbody>
+                <tr>
+                    <td class="dlbox01" style="background-image: linear-gradient(to right, #ffc700, #ffe349, #fff265) !important;" align="center" valign="top" id="contactUsBox">
+                        <div style="width:100%;min-height:165px;max-height:350px;display:inline-block;overflow-y:scroll;">
+                            <div id="tab_0" style="display:none;border-bottom: 1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">緊急維修</font>
+
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab_1" style="display:block;border-bottom:1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">星期一</font>
+                                        <br />
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">Super體育</div>12:00 至 16:30<br /><br />
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">WM百家樂</div>12:00 至 14:30<br /><br />
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">六合彩539</div>12:30 至 16:30<br /><br />
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">歐博</div>08:00 至 12:00<br /><br />
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">沙龍百家樂</div>09:00 至 13:30<br />
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab_2" style="display:block;border-bottom:1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">星期二</font>
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">RTG天地</div>09:00 至 09:30<br />
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab_3" style="display:block;border-bottom:1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">星期三</font>
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">DG百家樂</div>07:00 至 10:00<br />
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">MG棋牌</div>11:00 至 13:00<br />
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">幸運棋牌</div>07:00 至 09:00<br />
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab_4" style="display:none;border-bottom: 1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">星期四</font>
+
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab_5" style="display:block;border-bottom:1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">星期五</font>
+                                        <div style="width:60%;height:28px;margin:0 auto;color:white;background:#0e3f64">OB Sport</div>13:00 至 14:00<br />
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab_6" style="display:none;border-bottom: 1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">星期六</font>
+
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                            <div id="tab_7" style="display:none;border-bottom: 1.4px solid black;">
+                                <div style="width: 100%; text-align: center; color: black;font-weight: 400;line-height:25px; font-size: 15px">
+                                    <div style="width:100%;min-height:100px;">
+                                        <br />
+                                        <font style="font-weight:bold;">星期日</font>
+
+                                    </div>
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td align="center" valign="top" style="width: 48px;">
+                        <table border="0" cellspacing="0" cellpadding="0" style="width: 100%; height: 50px; background-image: linear-gradient(to top, #ffc700, #fef9c0); border-top-right-radius: 15px; border-bottom-right-radius: 15px;">
+                            <tbody>
+                                <tr>
+                                    <td height="10px"></td>
+                                </tr>
+                                <tr>
+                                    <td class="dlboxbar" align="center" valign="top">
+                                        <div class="dlbaricon">
+                                            <img src="Assets/img/time-icon.png" style="margin-left: 10px"></div>
+                                        <p style="writing-mode: tb; margin-left: -3px; margin-top: 5px; color: #000000; font-weight: 600; font-size: 19px;">維護時間</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+    <!--dowmload title right-->
+    <div class="dlbox-right" id="Div1">
+        <table class="dlboxtable" cellspacing="0" cellpadding="0" style="background-color: #ff000000 !important;">
+            <tbody>
+                <tr>
+
+                    <td align="center" valign="top" style="width: 68px;">
+                        <table border="0" cellspacing="0" cellpadding="0" style='width: 100%; height: 50px; background-image: linear-gradient(to top, rgb(92, 177, 210), rgb(19, 86, 187)) ; border-top-left-radius: 15px; border-bottom-left-radius: 15px;'>
+                            <tbody>
+                                <tr>
+                                    <td height="10px"></td>
+                                </tr>
+                                <tr>
+                                    <td class="dlboxbar" align="center" valign="top">
+                                        <div class="dlbaricon" style="top: 10px">
+                                            <img src="Assets/Gold/img/c-img/contact.png" style="width: 28px; padding-left: 0.3vw;">
+                                            <p style="writing-mode: tb; color: #000000; font-weight: 600; font-size: 19px;">&nbsp;聯系我們</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+
+                    <td class="dlbox01" style="background-image: linear-gradient(to top, #38c9ff 0%, #1a4b7f 50%, #0b2351 100%) !important;" align="center" valign="top" id="Td1">
+                        <table border="0" cellspacing="0" cellpadding="0" style="width: 250px; background-color: #ff000000 !important;" id="Table1">
+                            <tbody>
+
+
+
+                                <tr>
+                                    <td class="dlicon01" style="border-bottom: 1.4px solid black;" align="center" valign="middle">
+                                        <table class="dlboxtable01" border="0" style="width: 200px; height: 54px; background-color: #ff000000 !important;" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr style="border-bottom: 0px solid white;">
+                                                    <td>
+                                                        <div style="float: left">
+                                                            <img src="Assets/img/call.png" alt="卡利百家樂-卡利下載" style="width: 45px">
+                                                        </div>
+
+                                                        <div style="float: left; width: 110px; margin-left: 20px; color: white; font-weight: 400; line-height: 25px; font-size: 15px">
+                                                            24X7
+                                                            <br />
+                                                            在線客服
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="dlicon01" style="border-bottom: 1.4px solid black;" align="center" valign="middle">
+                                        <table class="dlboxtable01" border="0" style="width: 200px; height: 50px; background-color: #ff000000 !important;" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr style="border-bottom: 0px solid white;">
+                                                    <td>
+                                                        <div class="lineqr" style="width: 100%; height: 100px; text-align: center; padding-top: 5px; padding-bottom: 5px;">
+                                                            <img src="Assets/img/rnbqr.png" alt="任你博集團-沙龍百家樂" style="height: 100px;">
+                                                        </div>
+                                                        <div style="float: left">
+                                                            <img src="Assets/img/line.png" style="width: 40px">
+                                                        </div>
+                                                        <a href="https://line.me/R/ti/p/%40999xc" target="_blank">
+                                                            <div class="contacts" style="float: left; margin-left: 20px; width: 100px; color: white; font-weight: 400; line-height: 40px; font-size: 15px">@999xc </div>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="dlicon01" style="border-bottom: 1.4px solid black;" align="center" valign="middle">
+                                        <table class="dlboxtable01" border="0" style="width: 200px; height: 50px; background-color: #ff000000 !important;" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr style="border-bottom: 0px solid white;">
+                                                    <td>
+                                                        <div style="float: left">
+                                                            <img src="Assets/img/wechat.png" style="width: 40px">
+                                                        </div>
+                                                        <div class="contacts cws" style="float: left; margin-left: 20px; width: 100px; color: white; font-weight: 400; line-height: 40px; font-size: 15px">love999xc </div>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="dlicon01" align="center" valign="middle">
+                                        <table class="dlboxtable01" border="0" style="width: 200px; height: 50px; background-color: #ff000000 !important;" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr style="border-bottom: 0px solid white;">
+                                                    <td>
+                                                        <div style="float: left">
+                                                            <img src="Assets/img/message.png?=1.2" style="width: 40px">
+                                                        </div>
+                                                        <div class="contacts" style="float: left; margin-left: 20px; width: 100px; color: white; font-weight: 400; line-height: 40px; font-size: 15px">客訴信箱 </div>
+
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </td>
+
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--mobile00 s-->
+    <div class="mycontainer" style="display: none;">
+        <div class="navbar-header mysite">
+
+            <button class="navbar-toggle collapsed " type="button" data-toggle="collapse" data-target="#navbar"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+
+
+            <button class="navbar-toggle collapsed mysignupbut welcometitle" type="button" data-toggle="collapse" data-target="#navbar4"><span class="sr-only">Toggle navigation</span><span class="icon icon-user myinfoicon"></span><span id="lblWelcome2">歡迎, sup0001</span></button>
+
+        </div>
+    </div>
+    <!--mobile00 e-->
+
+    <!--news s-->
+
+    <div id="div_test" style="cursor:pointer">
+        <marquee class="marquee" direction="left" loop="-1" scrollamount="7" onmouseout="this.start()" onmouseover="this.stop()">
+            •&emsp;【存款公告】：親愛的會員您好，為了保障會員資金安全性，使用信用卡、ATM轉帳以及VIP專用帳戶存款，請務必使用本人帳戶，若使用非本人帳戶存款將一律扣除營利退本金處理，相關損失需自行承擔風險，請見諒。&emsp;&emsp;&emsp;•&emsp;【維護公告】：親愛的會員您好，歐博空戰進行維護，造成不便請見諒，有問題可以隨時連絡客服中心!&emsp;&emsp;&emsp;•&emsp;【取款公告】：親愛的會員您好，由於體育相關注單會有因改判賽事等等因素而進行注單重新結算，固即日起，本網站需進行出款時，體育相關注單須全數派彩完畢才可處理支付款項，若有未派彩注單請耐心等候派彩完畢，如有相關取款問題歡迎詢問24H在線客服，謝謝。&emsp;&emsp;&emsp;•&emsp;任你博娛樂城提供您24小時線上客服及儲值出金火速到帳服務，讓您隨時安心、愉快遊玩遊戲。&emsp;&emsp;&emsp;•&emsp;【優惠公告】：歡迎您進入任你博娛樂集團，目前推出首存優惠，滿1000送500，最高送1000優惠金，快聯繫客服領取喔!!!!&emsp;&emsp;&emsp;
+        </marquee>
+    </div>
+
+
+
+
+
+    <!--blog tabs-->
+    <div class="mycontainer blog_list blog_category" style="border-top: 2px solid #fff; border-image: linear-gradient(to right,#907200 ,#ffeead, #907200); border-image-slice: 1; display: none;">
+        <div class="row">
+            <div id="divBlogList" class="col-md-12 text-center">
+                <div class="div_blog_list">
+                    <ul class="blog_list">
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/baccarat" data-cid="1" data-pathname="baccarat">百家樂</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/baccaratgame" data-cid="2" data-pathname="baccaratgame">百家樂公式</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/sportslottery" data-cid="3" data-pathname="sportslottery">體育博彩</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/bingo" data-cid="4" data-pathname="bingo">賓果彩票</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/slotgame" data-cid="5" data-pathname="slotgame">電子遊戲</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/news" data-cid="7" data-pathname="news">最新消息</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/promotion" data-cid="8" data-pathname="promotion">優惠活動</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/yulecheng" data-cid="10" data-pathname="yulecheng">娛樂城</a>
+                        </li>
+                        <li>
+                            <a class="blog_cate" href="/web/blog/category/scam-casino-report" data-cid="11" data-pathname="scam-casino-report">詐騙娛樂城公告</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <!--news e-->
+
+    <!--01 s-->
+    <!--button class="btn btn-primary bottombut" data-toggle="modal" data-target="#infoModalAlertColored" type="button">
+        <img src="/web/Assets/Gold/img/ChatSupport1.png" style="width: 38px" alt="..">
+    </!--button-->
+
+    <!--contact s-->
+
+    <!-- //\\
+         
+    <button class="btn btn-primary livechatbtn" data-toggle="modal" data-target="" type="button">
+        <a onclick="window.open('https://tawk.to/chat/5a125821198bd56b8c03c1da/default/?$_tawk_popout=true', 'popup_window', 'width=700,height=400,resizable=yes')">Chat Now</a>
+        <img src="/web/Assets/img/arrow.png" alt=".." >
+    </button>
+
+    -->
+    <!--contact e-->
+
+    <!--line to index s-->
+
+
+    <script type="text/javascript" src="/mobile/assets/js/pages/blog.js?v=20200505a"></script>
+    <style>
+        .blogNav a:hover,
+        .blogNav a:focus,
+        .blogNav a.active {
+            color: gold !important;
+            font-weight: 700;
+        }
+    </style>
+    <div id="MainContent_div_content" style="width: 100%; min-height: 500px; background-image: url(../Assets/img/mybg2.jpg);">
+        <div id="blogNav" style="padding-top: 10px;padding-left: 2.5%;width:80%;min-height:500px;margin-top:20px;margin:0 auto;background-color:#DAD3D3;">
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>北京賽車-翻倍投注技巧是什麼？</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>翻倍投注技巧是什麼？...</small><br><br><a href="/web/blog/pk10-teaching-skill-part1"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>07/05/2020</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車技巧】PK10一玩就上手！</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車技巧】PK10一玩就上手！
+                     
+                     
+
+                    近期彩票遊戲的興起，
+                    北京賽車PK10賠率最高可達43.6倍，
+                    玩法簡單易懂，
+                    因此引起許多玩家積極鑽研北京賽車破解、p...</small><br><br><a href="/web/blog/67"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>14/02/2020</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車技巧】北京賽車PK10預測，教你進階高獲利玩法！</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                     
+                    【北京賽車技巧】北京賽車PK10預測，教你進階高獲利玩法！
+                     
+
+                    許多北京賽車老手都知道，
+                    雖然玩法非常簡單容易上手，
+                    卻沒有一個北京賽車技巧能夠確保100%獲利，...</small><br><br><a href="/web/blog/65"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>06/02/2020</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車PK10五分鐘快速翻本】北京賽車技巧攻略</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車PK10五分鐘快速翻本】北京賽車技巧攻略
+                    2019/12/06更新
+
+                    北京賽車又稱為北京pk10，
+                    風靡於兩岸三地，
+                    可以說是目前最熱門的快開彩！
+                    由中國北京...</small><br><br><a href="/web/blog/pk10-skill"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>26/09/2019</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車公式】北京賽車穩贏兩大投注法公開</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車公式】北京賽車穩贏兩大投注法公開
+                     
+                     
+
+                    北京賽車pk10的玩法技巧非常豐富，
+                    懂得運用北京賽車技巧能幫助玩家在迷茫遊戲中增加勝率外，
+                    也有許多玩家過度依賴...</small><br><br><a href="/web/blog/60"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>09/01/2020</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車pk10】輕鬆學會看北京賽車走勢圖！</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車pk10】輕鬆學會看北京賽車走勢圖！
+                     
+                     
+
+                    許多新手玩家都想知道有哪些北京賽車公式能使勝率更高，
+                    卻不了解北京賽車走勢圖，
+                    才是最基本的穩贏首要條件，
+                    根...</small><br><br><a href="/web/blog/56"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>19/12/2019</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車pk10】北京賽車如何有效掌握走勢規律</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車pk10】北京賽車如何有效掌握走勢規律
+                     
+                     
+
+                    許多熱愛賓果彩票的玩家都知道，
+                    北京賽車玩法雖然簡單卻又細分為：
+                    單雙玩法、大小等熱門玩法，
+                    都是根據遊戲區...</small><br><br><a href="/web/blog/55"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>29/11/2019</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車公式】三步驟教你北京賽車如何輕鬆贏！</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車公式】三步驟教你北京賽車如何輕鬆贏！
+                     
+                     
+                     
+                    近來北京賽車pk10在眾多賓果遊戲中，
+                    不僅成為最熱門的娛樂之外，
+                    甚至還為娛樂城增添了全新客層和消費玩家。...</small><br><br><a href="/web/blog/52"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>22/11/2019</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車玩法】新手北京賽車穩贏技巧篇！</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車玩法】新手北京賽車穩贏技巧篇！
+                     
+                     
+
+                    電子遊戲種類五花八門，
+                    而近期北京賽車成為時下最熱門的電子遊戲種類，
+                    不管是簡易的虛擬賽車玩法、還是五分鐘的快速開獎...</small><br><br><a href="/web/blog/50"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>14/11/2019</label></div>
+            <div style='width:97%; padding:15px; background:rgb(0, 0, 0, 0.9);margin-bottom:10px;' class='divbg'><strong style='color:#ece061; font-size:16px;' class='divtitle'>【北京賽車技巧】PK10贏錢大全</strong><br><br><small style='color:#ece061; font-size:14px;' class='divdesc'>
+                    【北京賽車技巧】PK10贏錢大全
+                     
+                     
+                     
+                    上次跟大家分享了北京賽車的玩法，
+                    想必各位對北京賽車的規則也更加了解了吧！
+                    接下來就要來更深入的討論北京賽車，
+                    也就是關於...</small><br><br><a href="/web/blog/37"><button type='button' style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236;cursor:pointer; width: 50%; text-align: left;' class='divreadmore'>更多詳情...</button></a><label style='color:#f0ad4e;background-color:transparent;transition: all .5s;border:0px solid #eea236; float: right; width: 50%; text-align: right;'>17/10/2019</label></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            BlogNavSetSelected();
+        });
+    </script>
+
+
+    <!--line to index e-->
+    <!--01 e-->
+
+
+
+    <!-- WEB FOOTER -->
+    <div class="myfooterbg copyright">
+        <div class="mycontainer" style="width:1261px!important">
+            <div class="row">
+                <style>
+                    .p2 {
+                        /*width: 143px !important;*/
+                        width: 160px !important;
+                    }
+                </style>
+                <div class="col-md-12">
+                    <div class="footer-top">
+                        <h4 class="myfooter-heading">遊戲提供商</h4>
+                        <a href="products.html" class="mysignin">產品總覽頁</a>
+                    </div>
+                    <ul class="myfooter-links">
+                        <div class="col-md-12">
+                            <li>
+                                <a href="allbet_livecasino.html">
+                                    <img src="Assets/img/game1.png" class="p2" alt="歐博百家樂-歐博娛樂城">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="sa_livecasino.html">
+                                    <img src="Assets/img/game2.png?v=123" class="p2" alt="沙龍百家樂外掛-沙龍百家樂破解">
+                                </a>
+                            </li>
+                        </div>
+                        <div class="col-md-12">
+                            <li>
+                                <a href="dg_livecasino.html">
+                                    <img src="Assets/img/game3.png" class="p2" alt="DG百家樂-夢幻娛樂城">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="9k_lottery.html">
+                                    <img src="Assets/img/game4.png?v=1.3" class="p2" alt="鑫城賓果-鑫城娛樂城">
+                                </a>
+                            </li>
+                        </div>
+                        <div class="col-md-12">
+                            <li>
+                                <a href="super_lottery.html">
+                                    <img src="Assets/img/game5.png" class="p2" alt="泰金888-香港六合彩">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="wm_livecasino.html">
+                                    <img src="Assets/img/game10.png" class="p2" alt="線上百家樂-卡利百家樂">
+                                </a>
+                            </li>
+                        </div>
+                        <div class="col-md-12">
+                            <li>
+                                <a href="rtg_slot.html">
+                                    <img src="Assets/img/game7.png?v=1.2" class="p2" alt="電子拉霸-沙龍電子 ">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="super_sports.html">
+                                    <img src="Assets/img/game8.png" class="p2" alt="地下球版-運彩球版">
+                                </a>
+                            </li>
+                        </div>
+
+                        <div class="col-md-12">
+                            <li>
+                                <a href="betixon_slot.html">
+                                    <img src="Assets/img/imgGameProviderIconBeixont.png" class="p2" alt="電子拉霸-Betixon電子">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="luckygaming.html">
+                                    <img src="Assets/img/imgLuckyGamingFooterIcon.png" class="p2" alt="體育博彩-地下賭盤">
+                                </a>
+                            </li>
+                        </div>
+                        <div class="col-md-12">
+                            <li>
+                                <a href="bwin_slot.html">
+                                    <img src="Assets/img/imgIconicGamingFooterIcon.png?v=1.2" class="p2" alt="電子拉霸-必贏電子">
+                                </a>
+                            </li>
+                            <li>
+                                <a href="dreamtech_slot.html">
+                                    <img src="Assets/img/imgDreamtechFooterIcon.png" class="p2" alt="體育博彩-地下賭盤">
+                                </a>
+                            </li>
+                        </div>
+                        <div class="col-md-12">
+                            <li class="">
+                                <a href="mg_gaming.html">
+                                    <img src="Assets/img/imgMGCardsGameFooterIcon.png" class="p2" alt="MGQP">
+                                </a>
+                            </li>
+                            <li class="">
+                                <a href="tfgaming.html">
+                                    <img src="Assets/img/imgGameProviderIconTFGaming.png" class="p2" alt="雷火">
+                                </a>
+                            </li>
+                        </div>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .testnone {
+            display: none;
+        }
+    </style>
+
+    <!--blog footer s-->
+    <div class="mycontainer blog_list" style="border-top: 2px solid #fff; border-image: linear-gradient(to right,#907200 ,#ffeead, #907200); border-image-slice: 1; display: none;">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <ul class="blog_list">
+                    <li><a href="index.html">娛樂城</a></li>
+                    <li><a href="livecasino.html">百家樂試玩</a></li>
+                    <li><a href="sportsbook.html">球版現金版</a></li>
+                    <li><a href="slotgame.html">電子拉霸</a></li>
+                    <li><a href="lottery.html">鑫城賓果</a></li>
+                    <li><a href="yulecheng.html">百家樂技巧教學</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--3nd footer s-->
+    <div class="mycontainer copyright" style="border-top: 2px solid #fff; border-image: linear-gradient(to right,#907200 ,#ffeead, #907200); border-image-slice: 1;">
+        <div class="row mycopyrighttopboder">
+            <div class="col-md-12">
+                <p class="mycopyrighttext-left">【任你博】 所有版權未經本公司合法授權任意復制 版權必究</p>
+            </div>
+        </div>
+    </div>
+    <!--3nd footer e-->
+
+    <!-- Modal Transfer SITE -->
+    <div id="modalGame" style="display:none;">
+        <div class="iziModal-header iziModal-noSubtitle" style="background: rgb(136, 160, 185); padding-right: 40px;">
+            <h2 class="iziModal-header-title">遊戲轉帳</h2>
+            <p class="iziModal-header-subtitle"></p>
+            <div class="iziModal-header-buttons">
+                <a href="javascript:void(0)" class="iziModal-button iziModal-button-close" data-izimodal-close=""></a>
+            </div>
+        </div>
+        <div class="iziModal-wrap" style="height: 250px;">
+            <div class="iziModal-content" style="padding: 0px;">
+                <div class="mymodalcontent">
+                    <!-- wallet image -->
+                    <div style="margin:0 auto;width:400px;height:180px;">
+                        <div class="col-4">
+                            <img src="Assets/img/imgMainWalletFromIcon.png" height="140" />
+                            <div style="text-align:center;">
+                                <label id="txtTransferFrom" for="txtTransferFrom" class="control-label" style="font-size:16px;font-weight:bold;color:#fff"></label>
+                            </div>
+                            <div style="margin-top:1px;text-align:center;">
+                                <label id="txtTransferFromBalance" style="font-size:30px;color:#ffcc00" for="txtTransferFromBalance" class="control-label "></label>
+                            </div>
+                        </div>
+                        <div class="col-4"><img style="margin-top:45px;margin-left:28px" src="Assets/img/imgArrowIcon.png" /></div>
+                        <div class="col-4">
+                            <img src="Assets/img/imgMainWalletToIcon.png" height="140" />
+                            <div style="text-align:center;">
+                                <label id="txtTransferTo" for="txtTransferTo" class="control-label" style="font-size:16px;font-weight:bold;color:#fff"></label>
+                            </div>
+                            <div style="margin-top:1px;text-align:center;">
+                                <label id="txtTransferToBalance" style="font-size:30px;color:#ffcc00" for="txtTransferToBalance" class="control-label "></label>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin:0 auto;width:500px;height:220px;margin-top:53px;">
+                        <input name="ctl00$MainContent$uname" type="text" id="txtMoney" class="font-xl txt_transfer op-40 op-35" placeholder="輸入轉入的金額">
+                        <button id="btn_confirm" style="width:180px;height:48px;border: 2px solid #018fde;margin-left:6px;border-radius:12px;color:white;font-size:18px;background-color:#09162f">確認轉帳</button>
+                        <div style="width:311px;height:48px;margin-top:20px;float:left">
+                            <button id="btn_money1" style="width:93px;height:48px;border: 2px solid #018fde;border-radius:12px;font-size:20px;color:#ffcc00;background-color:#033b78">100</button>
+                            <button id="btn_money2" style="width:93px;height:48px;border: 2px solid #018fde;border-radius:12px;margin-left:5px;font-size:20px;color:#ffcc00;background-color:#033b78">500</button>
+                            <button id="btn_money3" style="width:93px;height:48px;border: 2px solid #018fde;border-radius:12px;margin-left:5px;font-size:20px;color:#ffcc00;background-color:#033b78">1000</button>
+                        </div>
+                        <div style="width:180px;height:48px;margin-top:20px;float:left;">
+                            <button id="btn_transferout" style="width:180px;height:48px;border: 2px solid #018fde;border-radius:12px;color:white;font-size:18px;background-color:#09162f">全部轉出</button>
+                        </div>
+                        <div style="width:311px;height:48px;margin-top:20px;float:left">
+                            <button id="btn_money4" style="width:93px;height:48px;border: 2px solid #018fde;border-radius:12px;font-size:20px;color:#ffcc00;background-color:#033b78">5000</button>
+                            <button id="btn_money5" style="width:93px;height:48px;border: 2px solid #018fde;border-radius:12px;margin-left:5px;font-size:20px;color:#ffcc00;background-color:#033b78">10000</button>
+                            <button id="btn_all" style="width:93px;height:48px;border: 2px solid #018fde;font-size:18px;margin-left:5px;border-radius:12px;color:white;background-color:#09162f">全部轉入</button>
+                        </div>
+                        <div style="width:180px;height:48px;margin-top:20px;float:left;">
+                            <button id="btn_game" style="width:180px;height:48px;border: 2px solid #018fde;font-size:18px;border-radius:12px;color:white;background-color:#b98c29">直接進入</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Announcement -->
+    <div id="modalAnnouncement" style="display:none;">
+        <div class="iziModal-header iziModal-noSubtitle" style="background: rgb(136, 160, 185); padding-right: 40px;">
+            <h2 class="iziModal-header-title">公告</h2>
+            <p class="iziModal-header-subtitle"></p>
+            <div class="iziModal-header-buttons">
+                <a href="javascript:void(0)" class="iziModal-button iziModal-button-close" data-izimodal-close=""></a>
+            </div>
+        </div>
+        <div class="iziModal-wrap" style="height: 250px;">
+            <div class="iziModal-content" style="padding: 0px;">
+                <div class="mymodalcontent" style="color:white; font-size:15px;">
+                    •&emsp;【存款公告】：親愛的會員您好，為了保障會員資金安全性，使用信用卡、ATM轉帳以及VIP專用帳戶存款，請務必使用本人帳戶，若使用非本人帳戶存款將一律扣除營利退本金處理，相關損失需自行承擔風險，請見諒。<br />•&emsp;【維護公告】：親愛的會員您好，歐博空戰進行維護，造成不便請見諒，有問題可以隨時連絡客服中心!<br />•&emsp;【取款公告】：親愛的會員您好，由於體育相關注單會有因改判賽事等等因素而進行注單重新結算，固即日起，本網站需進行出款時，體育相關注單須全數派彩完畢才可處理支付款項，若有未派彩注單請耐心等候派彩完畢，如有相關取款問題歡迎詢問24H在線客服，謝謝。<br />•&emsp;任你博娛樂城提供您24小時線上客服及儲值出金火速到帳服務，讓您隨時安心、愉快遊玩遊戲。<br />•&emsp;【優惠公告】：歡迎您進入任你博娛樂集團，目前推出首存優惠，滿1000送500，最高送1000優惠金，快聯繫客服領取喔!!!!<br />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="Assets/js/vendor.min.js"></script>
+    <script src="Assets/js/elephant.min.js?v=2"></script>
+    <script src="Assets/js/landing-page.min.js"></script>
+    <script src="Assets/js/application.min.js"></script>
+    <script src="Assets/js/demo.min.js"></script>
+
+    <script type="text/javascript" src="Assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="Assets/js/jquery-ui.custom.min.js"></script>
+    <script type="text/javascript" src="Assets/js/jshashtable-2.1.js"></script>
+    <script type="text/javascript" src="Assets/js/jquery.numberformatter-1.2.3.min.js"></script>
+    <script type="text/javascript" src="Assets/js/jackpot.js"></script>
+    <script type="text/javascript" src="Assets/js/addon.js"></script>
+    <!-- END OF /. PAGE TITLE SECTION -->
+
+</body>
+
+</html>
+<style>
+    .blog_link {
+        margin: auto !important;
+    }
+
+    ul.blog_list {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333333;
+    }
+
+    .blog_list li {
+        float: none;
+        display: inline-block;
+    }
+
+    .blog_list li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        text-decoration: none;
+    }
+
+    .blog_list li a:hover {
+        background-color: #111111;
+    }
+
+    .blog_category li {
+        font-size: 16px !important;
+    }
+
+    .blog_category li a:hover,
+    .blog_category li a:active,
+    .blog_active a {
+        background-color: #111111;
+        color: yellow !important;
+    }
+</style>
+<script type="text/javascript">
+    var download_timeout;
+
+    $("#mainTitle").hover(function() {
+        $("#mainTitle").animate({
+            left: 0
+        }, 500);
+        clearTimeout(download_timeout);
+    }, function() {
+        clearTimeout(download_timeout);
+        download_timeout = setTimeout(function() {
+            $("#mainTitle").animate({
+                left: "-208px"
+            }, 500);
+        }, 500);
+    });
+
+    $("#downloadTitle").hover(function() {
+        $("#downloadTitle").animate({
+            left: -10
+        }, 500);
+        clearTimeout(download_timeout);
+    }, function() {
+        clearTimeout(download_timeout);
+        download_timeout = setTimeout(function() {
+            $("#downloadTitle").animate({
+                left: "-250px"
+            }, 500);
+        }, 500);
+    });
+</script>
+
+<!--right-->
+<script type="text/javascript">
+    var playersession = 'UserDetails';
+
+    if (playersession) {
+        $(document).ready(function() {
+            //setTimeout(function () {
+            //    CheckPlayerSession();
+            //}, 3000);
+            CheckPlayerSession();
+
+        });
+    }
+    var STOCK_CONTACT_COUNT;
+    var EMPTY_CONTACT_COUNT;
+
+    $(document).ready(function() {
+        EMPTY_CONTACT_COUNT = 0;
+        STOCK_CONTACT_COUNT = 3;
+        $('.contacts').each(function() {
+            if (!$(this).text() || $(this).text().trim() == "" || $(this).text().trim() == "-") {
+                EMPTY_CONTACT_COUNT += 1;
+                var parent = $(this).closest('tr');
+                var grandparent = parent.parent().parent().parent().parent();
+                if (grandparent) {
+                    grandparent.hide();
+                }
+            }
+            if (EMPTY_CONTACT_COUNT >= STOCK_CONTACT_COUNT) {
+                $('#Div1').hide();
+            }
+        });
+
+        $('.blog_list').css('width', '100%').show();
+    });
+
+    var download_timeout;
+
+    $("#Div1").hover(function() {
+        $("#Div1").animate({
+            right: 0
+        }, 500);
+        clearTimeout(download_timeout);
+    }, function() {
+        clearTimeout(download_timeout);
+        download_timeout = setTimeout(function() {
+            $("#Div1").animate({
+                right: "-270px"
+            }, 500);
+        }, 500);
+    });
+</script>
+<script>
+    var PLAYER_SESSION;
+    var OPENED_POPUP_WINDOWS = [];
+
+    $('#btnLogout').click(function() {
+        //CloseGamePopup();
+        window.PLAYER_SESSION = 0;
+        window.location.href = "../Logout.aspx";
+    });
+
+    //function CloseGamePopup() {
+    //    if (sessvars.OPENED_POPUP_WINDOWS) {
+    //        for (var i = 0; i < sessvars.OPENED_POPUP_WINDOWS.length; i++) {
+    //            var win = sessvars.OPENED_POPUP_WINDOWS[i];
+    //            if (win) win.close();
+    //        }
+    //    }
+    //}
+    //function pushpopup(window) {
+    //    if (!sessvars.OPENED_POPUP_WINDOWS)
+    //        sessvars.OPENED_POPUP_WINDOWS = [];
+
+    //    sessvars.OPENED_POPUP_WINDOWS.push(window);
+    //}
+    $("input[data-provide='datepicker']").each(function() {
+        var attr = $(this).attr('data-date-language');
+        if (typeof attr === typeof undefined || attr === false) {
+            $(this).attr('data-date-language', 'zh-CHT');
+        }
+    });
+
+    //$('.divbg').css('background-color', "grey");
+    //$('.divbg').css('border-radius', "10px");
+    getRouteUrlParameter = function(sParam) {
+        var value = window.location.pathname;
+
+        var sub = value.split('/');
+        if (sub.indexOf(sParam) > -1) {
+            return sub[sub.indexOf(sParam) + 1];
+        } else {
+            return null;
+        }
+    };
+
+
+    BlogNavSetSelected = function() {
+
+        var param = getRouteUrlParameter('category');
+
+        var pathname = location.pathname;
+        //console.log(pathname);
+        var o;
+
+        if (param) {
+            //read path 1st
+            o = $('.blog_cate[data-pathname=' + param + ']:first');
+            if (!o || $(o).data('pathname') != param) {
+                //path not found, read by id
+                o = $('.blog_cate[data-cid=' + param + ']:first');
+            }
+            //console.log(o);
+
+            if (o) {
+                $(o).parent().addClass('blog_active');
+
+                ////deselect others
+                //if (!isNaN(parseInt(param)) && param > 0) {
+                //    $('.blog_cate:not([data-cid=' + param + '])').each(function () {
+                //        $(this).removeClass('blog_active');
+                //    });
+                //} else {
+                //    $('.blog_cate:not([data-pathname=' + param + '])').each(function () {
+                //        $(this).removeClass('blog_active');
+                //    });
+                //}
+            }
+        }
+    };
+
+    $(document).ready(function() {
+        BlogNavSetSelected();
+    });
+</script>
+
+<style>
+    .divbg {
+        background: linear-gradient(to top, #0b2351 0%, #1a4b7f 50%, #0b2351 100%) !important;
+        border-radius: 10px !important;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    /*#Maincontent_content {
+        background-color: blue !important;
+    }*/
+</style>

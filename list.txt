@@ -1,0 +1,44 @@
+<header>
+	http://localhost/rennebo/web/index.html
+	http://localhost/rennebo/web/myprofile.html
+	http://localhost/rennebo/web/FAQ.html
+	http://localhost/rennebo/web/livecasino.html
+http://localhost/rennebo/web/sportsbook.html
+	http://localhost/rennebo/web/card.html
+http://localhost/rennebo/web/slotgame.html
+	http://localhost/rennebo/web/lottery.html
+	http://localhost/rennebo/web/arcade.html
+	http://localhost/rennebo/web/esports.html
+	http://localhost/rennebo/web/promotion.html
+	http://localhost/rennebo/web/referral.html
+
+<footer>
+	http://localhost/rennebo/web/products.html
+	http://localhost/rennebo/web/allbet_livecasino.html
+	http://localhost/rennebo/web/sa_livecasino.html
+	http://localhost/rennebo/web/dg_livecasino.html
+http://localhost/rennebo/web/wm_livecasino.html
+	http://localhost/rennebo/web/rnb_sports.html
+http://localhost/rennebo/web/super_sports.html
+	http://localhost/rennebo/web/luckygaming.html
+	http://localhost/rennebo/web/mg_gaming.html
+	http://localhost/rennebo/web/sa_slot.html
+	http://localhost/rennebo/web/rtg_slot.html
+	http://localhost/rennebo/web/dreamtech_slot.html
+	http://localhost/rennebo/web/betixon_slot.html
+	http://localhost/rennebo/web/bwin_slot.html
+http://localhost/rennebo/web/super_lottery.html
+	http://localhost/rennebo/web/9k_lottery.html
+http://localhost/rennebo/web/tfgaming.html
+	http://localhost/rennebo/web/sa_fish.html
+	http://localhost/rennebo/web/rtg_fish.html
+	http://localhost/rennebo/web/bwin_fish.html
+
+	http://localhost/rennebo/web/app.html
+	http://localhost/rennebo/web/baccarat.html
+	http://localhost/rennebo/web/baccaratgame.html
+	http://localhost/rennebo/web/bingo.html
+	http://localhost/rennebo/web/news.html
+	http://localhost/rennebo/web/promotion-b.html
+	http://localhost/rennebo/web/join.html	
+	http://localhost/rennebo/web/scam-casino-report.html

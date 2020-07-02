@@ -1,0 +1,486 @@
+.mycontainer {
+    width: 1024px;
+}
+.mycontainer.mycontainer02 {
+    width: 1200px;
+}
+.row.row2{
+    width: 70%;
+    float: left;
+}
+.newscontainer {
+    width: 100%;
+}
+.myjackpot-container {
+    width: 100%;
+}
+.mysecondbanner {
+    width: 40%;
+}
+.mysecondbanner.mysecondbanner01 {
+    text-align: right;
+    padding: 55px 0 0 0;
+}
+.box {
+    width:50%;
+}
+.box img {
+    width:100%;
+}
+.mytopbannerright {
+    color: #b58718;
+    font-size: 50px;
+    position: absolute;
+}
+.my-jackpot {
+    background: url(../../../Assets/img/jackpot.png)no-repeat center;
+    width: 100%;
+    height: 120px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+.jackpot-01 {
+    color: #000;
+    font-size: 30px;
+    text-align: center;
+    position: inherit; 
+}
+.font-02 {
+    line-height: 50px;
+}
+.jackpot-01 {
+    /*color: #b58718;
+    font-size: 50px;
+    position: absolute;
+    text-align: center;
+    margin-top: -180px;
+    margin-bottom: 60px;
+     top: 0px; */
+    /* left: 60px; */
+}
+/*4boxs*/
+.mybg105, .mybg106, .mybg107, .mybg108 {
+    width: 50%;
+    height: 135px;
+    float: left;
+    margin-right: 0%;
+    position: relative;
+}
+.mybottommargin2 {
+    margin-bottom: 20px;
+    margin-left: -10px;
+    margin-right: -10px;
+    width: 1024px;
+}
+.mybg110 {
+    width: 100%;
+    height: 145px;
+    float: left;
+    margin-right: 0%;
+    position: relative;
+}
+/*contact*/
+.myfooterbg {
+    background: -webkit-linear-gradient(top, #090703 0%, #1a4b7f 50%, #38c9ff 100%);
+    background: -o-linear-gradient(top, #090703 0%, #1a4b7f 50%, #38c9ff 100%);
+    background: -moz-linear-gradient(top,#090703 0%, #1a4b7f 50%, #38c9ff 100%);
+    background: linear-gradient(to top, #090703 0%, #1a4b7f 50%, #38c9ff 100%);
+}
+.myfooter-heading {
+    font-size: 18px;
+    font-weight: 500;
+    color: #fff;
+    padding: 5PX 0;
+}
+.mypadding {
+    padding: 40px 5px;
+}
+.contact-us1 {
+    background: #212121;
+    width: 450px;
+    height: 260px;
+    float: left;
+    border: 3px solid rgb(210, 169, 58);
+}
+.contact-us2 {
+    background: #212121;
+    width: 450px;
+    height: 260px;
+    float: right;
+    border: 3px solid rgb(210, 169, 58);
+}
+.mysocial-list-item1 {
+    background-color: transparent;
+    display: inline-block;
+    font-size: 15px;
+    margin-bottom: 10px;
+    width: 370px;
+}
+.p1 {
+    width: 200px;
+    padding:6px;
+}
+.p2 {
+    width: 180px;
+    padding:6px;
+}
+.p3 {
+    width: 100px;
+    padding:6px;
+}
+.pp1 {
+    padding: 16px 0px 0px 0px;
+}
+.pp2 {
+    padding: 16px 0px 18px 10px;
+}
+.livechaiweb {
+    margin-left: -15px;
+}
+/*footer*/
+.mycopyrighttopboder {
+    width: 100%;
+}
+.mycopyrighttext-left {
+    text-align: center;
+    padding: 15px;
+    margin: 0 0 0 0;
+    font-weight: 500;
+    color: white;
+    font-size: 13px;
+    letter-spacing: 1px;
+    background-color:#02001d;
+}
+.mycopyrighttext-right {
+    text-align: right;
+    padding: 0 0;
+    margin: 0 0 0 0;
+    font-weight: 700;
+}
+.myfooterbg p {
+    color: #aaa;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #fff;
+    opacity: 1; /* Firefox */
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #fff;
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #fff;
+}
+.mytopmenu01 p{
+    margin-top: 38px;
+}
+.bankright {
+    float:right;
+}
+.copyright {
+    width: 100%;
+}
+.livechatbtn a{
+    font-size: 14px;
+    color: #000;
+    padding-right: 60px;
+}
+.livechatbtn img {
+    width: 13%;
+}
+.mainlogo {
+    float:  left;
+    width: 30%;
+}
+.mainlogosize {
+    width: auto;
+    height: 130px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+/*new addon*/
+.fb1 {
+    width:1280px;margin:0 auto;text-align:center;
+}
+
+.mynewmenu img:hover {
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+@-webkit-keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+@keyframes mover {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-10px); }
+}
+
+#ic00 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon00.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc00:hover > #ic00{
+    background: url(../../../Assets/img/icon00-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic01 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon01.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc01:hover > #ic01{
+    background: url(../../../Assets/img/icon01-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic02 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon02.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc02:hover > #ic02{
+    background: url(../../../Assets/img/icon02-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic03 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon03.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc03:hover > #ic03{
+    background: url(../../../Assets/img/icon03-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic05 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon05.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc05:hover > #ic05{
+    background: url(../../../Assets/img/icon05-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic06 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon06.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc06:hover > #ic06{
+    background: url(../../../Assets/img/icon06-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic08 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon08.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc08:hover > #ic08{
+    background: url(../../../Assets/img/icon08-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic09 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon09.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc09:hover > #ic09{
+    background: url(../../../Assets/img/icon09-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic11 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon11.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc11:hover > #ic11{
+    background: url(../../../Assets/img/icon11-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic12 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon12.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc12:hover > #ic12{
+    background: url(../../../Assets/img/icon12-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic13 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon14.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc13:hover > #ic13{
+    background: url(../../../Assets/img/icon14-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic14 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon15.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc14:hover > #ic14{
+    background: url(../../../Assets/img/icon15-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic15 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/icon16.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc15:hover > #ic15{
+    background: url(../../../Assets/img/icon16-hover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic16 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/imgCardsGamesIconDefault.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc16:hover > #ic16{
+    background: url(../../../Assets/img/imgCardsGamesIconHover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+#ic17 {
+    height: 40px !important;
+    width: 40px !important;
+    background-image: url(../../../Assets/img/imgEsportsIconDefault.png);
+    background-size: 40px 40px;
+    margin:0 auto;
+}
+
+#oc17:hover > #ic17{
+    background: url(../../../Assets/img/imgEsportsIconHover.png);
+    background-size: 40px 40px;
+    -webkit-animation: mover 0.3s infinite  alternate;
+    animation: mover 0.3s infinite  alternate;
+}
+
+.stars, .twinkling{
+  position:absolute;
+  width:100%;
+  height:280px;
+  display:block;
+}
+
+.stars {
+  background:url(../../img/img2.png) repeat top center;
+  z-index:0;
+}
+
+.twinkling{
+  background:transparent url(../../img/img1.png) repeat top center;
+  z-index:1;
+
+  -moz-animation:move-twink-back 200s linear infinite;
+  -ms-animation:move-twink-back 200s linear infinite;
+  -o-animation:move-twink-back 200s linear infinite;
+  -webkit-animation:move-twink-back 200s linear infinite;
+  animation:move-twink-back 200s linear infinite;
+}
+
+
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-webkit-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-moz-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-ms-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}

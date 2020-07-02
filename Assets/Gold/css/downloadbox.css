@@ -1,0 +1,47 @@
+﻿.dlbox {
+ position: fixed;
+ top: 210px;
+ left: -208px;
+ z-index: 99999; 
+ cursor: pointer;
+}
+.dlbox-right {
+ position: fixed;
+ top: 210px;
+ right: -270px;
+ z-index: 99999; 
+ cursor: pointer;
+}
+.dlboxtable {
+    border-radius: 15px;
+}
+.dlbox01 {
+    width: 208px;
+    z-index: 999;
+}
+.dlicon {
+    height: 3px;
+}
+.dlicon01{
+    height: 40px;
+}
+.dlicon02 {
+    height: 50px;
+}
+.dlboxtable01 {
+    width: 50%;
+ 
+}
+.dlboxtable02 {
+    width: 50%;
+    background-color: #560806;
+}
+.dlboxbar {
+    width: 40px!important;
+    height: 155px;
+}
+.dlbaricon {
+    position: relative;
+    font-size: 20px;
+    left: -9px;
+}
