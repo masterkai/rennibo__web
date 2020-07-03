@@ -599,6 +599,168 @@
             text-decoration: none;
             cursor:pointer;
         }
+        .modal-container {
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1000;
+        }
+        .modal-container.show-modal {
+            display: block;
+        }
+        .modalWindow {
+            background-color: #000;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            position: absolute;
+            overflow: hidden;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 695px;
+            max-height: 650px;
+            height: 100%;
+            width: 90%;
+        }
+        .modalWindow__header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60px;
+            background: linear-gradient(180deg, rgba(0,56,107,1) 0%, rgba(0,196,255,1) 100%);
+        }
+        .modalWindow__header h3 {
+            margin: 0;
+            text-align:center;
+            color: #FFCF4C;
+        }
+        .modalWindow__content {
+            height: calc(100% - 60px);
+            overflow-y: scroll;
+            padding: 30px 60px;
+
+        }
+        .modalWindow__content::-webkit-scrollbar {
+            width: 12.34px;
+        }
+        .modalWindow__content::-webkit-scrollbar-thumb {
+            background-color: #454543;
+            outline: #5f5f5f solid 1px;
+        }
+        .modalWindow__content::-webkit-scrollbar-track {
+            background-color: #151515;
+        }
+        .modalWindow__content .depositNav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .modalWindow__content .depositNav .depositTab {
+            flex: 0 1 32%;
+        }
+        .close-btn {
+            background: transparent;
+            font-size: 25px;
+            position: absolute;
+            top: 12px;
+            right: 24px;
+            cursor: pointer;
+        }
+        .close-btn span {
+            color: white;
+            font-size: 2rem;
+        }
+        .depositTab {
+            padding-bottom: 10px;
+            cursor: pointer;
+        }
+        .depositTab.active {
+            border-bottom: 2px solid white;
+        }
+        .depositTab .btn {
+            width: 100%;
+            font-size: 1.5rem;
+            font-weight: 400;
+        }
+        .panelGroup .panel {
+            display: none;
+        }
+        .panelGroup .panel:first-child {
+            display: block;
+        }
+        span.yellow {
+            color:#FFCF4C;
+        }
+        .notice {
+            padding: 15px;
+            color:white;
+            text-align: center;
+            font-size: 1.375rem;
+        }
+        .panelNav {
+            display: flex;
+            justify-content: space-around;
+            border-radius: 50px;
+            border: 1px solid #D8D8D8;
+        }
+        .panelNav__tab {
+            color: #D8D8D8;
+            font-size: 1.5rem;
+            flex: 1 1 auto;
+            padding: 10px;
+            border-radius: 50px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .panelNav__tab.active {
+            background-color: #D8D8D8;
+            color: black;
+        }
+        .boxesGroup .box {
+            display: none;
+            width: 100%;
+        }
+        .boxesGroup .box:first-child {
+            display: block;
+        }
+        .boxesGroup .box form {
+            margin-top: 30px;
+        }
+        .boxesGroup .box form .form-group{
+            width: 100%;
+        }
+        .boxesGroup .box form .btn {
+            margin: 0 auto;
+            text-align: center;
+        }
+        .boxesGroup .box form .centerFlex {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .panel form .centerFlex {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        p.white {
+            padding: 15px;
+            color: #fff;
+        }
+        .boxesGroup .box form .centerFlex ul{
+            color: #fff;
+            line-height: 2;
+            width: 100%;
+            margin-top: 15px;
+        }
+        .boxesGroup .box form .centerFlex ul li {
+            color: #fff;
+            line-height: 2;
+        }
     </style>
 </head>
 
@@ -623,7 +785,7 @@
                         <span class='iconfont icon_coins-light'>
                             <div class='iconName' style='left:-20%;'>各廳流水</div>
                         </span>
-                        <span class='iconfont icon_sack-dollar-light' id='｀'>
+                        <span class='iconfont icon_sack-dollar-light' id='deposit'>
                             <div class='iconName' style='left:-12%;'>存/提款</div>
                         </span>
                         <span class='iconfont icon_e-wallet'>
@@ -1522,6 +1684,280 @@
     </div>
     <button id="btnPopupOpener" style="display: none"></button>
 
+    <!-- Modal -->
+    <div class="modal-container show-modal" id="modal">
+        <div class="modalWindow">
+            <div class="close-btn" id="close">
+                <span class="iconfont icon_times-light"></span>
+            </div>
+            <div class="modalWindow__header">
+                <h3>存提款</h3>
+            </div>
+            <div class="modalWindow__content" id="depositModal">
+                <div class="depositNav">
+                    <div class="depositTab active"><div class="btn">存款</div></div>
+                    <div class="depositTab"><div class="btn">提款</div></div>
+                    <div class="depositTab"><div class="btn">綁定銀行帳戶</div></div>
+                </div>
+                <div class="panelGroup">
+                    <div class="panel" id="depositPanel">
+                        <div class="notice">如需<span class="yellow">超商存款</span>，請洽在線客服</div>
+                        <div class="panelNav">
+                            <div class="panelNav__tab active">線上轉帳</div>
+                            <div class="panelNav__tab">線上刷卡</div>
+                            <div class="panelNav__tab">VIP存款區</div>
+                            <div class="panelNav__tab">超商</div>
+                        </div>
+                        <div class="boxesGroup">
+                            <div class="box">
+                                <form>
+                                    <div class="form-group" style='margin-bottom: 30px;'>
+                                        <label class="mb-3" style='color: #fff;'>通道</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                        />
+                                    </div>
+
+                                    <div class="form-group" style='margin-bottom: 30px;'>
+                                        <label class="mb-3" style='color: #fff;'>金額</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="最低1000點"
+                                        />
+                                        <p style="text-align: right;color: white;font-size: 1rem;margin: 5px 0 0;">最低 100 最高 50,000</p>
+                                    </div>
+
+
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="mb-3" style="color: #fff;">優惠</label>
+
+                                        <select id="w_ply_bank" class="form-control" name="w_ply_bank">
+                                            <option value="0">-- 請選擇 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <div class="btn">確認送出</div>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <p class="white">★存款請使用本人銀行操作，若非本人而影響後續出款權益須自行承擔</p>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="box">
+                                <form>
+                                    <div class="form-group" style='margin-bottom: 30px;'>
+                                        <label class="mb-3" style='color: #fff;'>通道</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                        />
+                                    </div>
+
+                                    <div class="form-group" style='margin-bottom: 30px;'>
+                                        <label class="mb-3" style='color: #fff;'>金額</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="最低1000點"
+                                        />
+                                        <p style="text-align: right;color: white;font-size: 1rem;margin: 5px 0 0;">刷卡需收8%手續費</p>
+                                    </div>
+
+
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="mb-3" style="color: #fff;">優惠</label>
+
+                                        <select class="form-control" name="w_ply_bank">
+                                            <option value="0">-- 請選擇 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <div class="btn">確認送出</div>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <p class="white">★存款請使用本人銀行操作，若非本人而影響後續出款權益須自行承擔</p>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="box">
+                                <form>
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="mb-3" style="color: #fff;">銀行帳戶</label>
+
+                                        <select class="form-control" name="w_ply_bank">
+                                            <option value="0">-- 請選擇 --</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" style='margin-bottom: 20px;'>
+                                        <label class="mb-3" style='color: #fff;'>金額</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="最低 100"
+                                        />
+                                        <p style="text-align: right;color: white;font-size: 1rem;margin: 5px 0 0;">最低 100</p>
+                                    </div>
+
+                                    <div class="form-group" style='margin-bottom: 30px;'>
+                                        <label class="mb-3" style='color: #fff;'>備註</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="請填寫匯款帳戶後五碼"
+                                        />
+                                    </div>
+
+
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="mb-3" style="color: #fff;">優惠</label>
+
+                                        <select class="form-control" name="w_ply_bank">
+                                            <option value="0">-- 請選擇 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <div class="btn">確認送出</div>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <ul>注意事項：
+                                            <li>VIP快速存款，上分更即時，24小時專屬客服為您服務</li>
+                                            <li>存款請使用本人銀行操作，若非本人而影響後續出款權益須自行承擔</li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="box">
+                                <form>
+                                    <div class="form-group" style='margin-bottom: 30px;'>
+                                        <label class="mb-3" style='color: #fff;'>通道</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="超商代碼(超商代碼)"
+                                        />
+                                    </div>
+
+                                    <div class="form-group" style='margin-bottom: 30px;'>
+                                        <label class="mb-3" style='color: #fff;'>金額</label>
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="最低 1,000 最高 5,000"
+                                        />
+                                        <p style="text-align: right;color: white;font-size: 1rem;margin: 5px 0 0;">最低 1,000 最高 5,000</p>
+                                    </div>
+
+
+                                    <div class="form-group" style="margin-bottom: 20px;">
+                                        <label class="mb-3" style="color: #fff;">優惠</label>
+
+                                        <select class="form-control" name="w_ply_bank">
+                                            <option value="0">-- 請選擇 --</option>
+                                        </select>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <div class="btn">確認送出</div>
+                                    </div>
+                                    <div class="centerFlex">
+                                        <ul>注意事項：
+                                            <li>請洽客服開通</li>
+                                            <li>系統將發配一組專屬交易單號，請至您選擇的超商門市進行繳費。</li>
+                                            <li>繳費完成後請妥善保管交易收據，以便查證。</li>
+                                        </ul>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="panel">
+                        <form>
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="mb-3" style="color: #fff;">銀行</label>
+
+                                <select class="form-control" name="w_ply_bank">
+                                    <option value="0">-- 請選擇 --</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" style='margin-bottom: 20px;'>
+                                <label class="mb-3" style='color: #fff;'>銀行戶名</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group" style='margin-bottom: 20px;'>
+                                <label class="mb-3" style='color: #fff;'>銀行帳號</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group" style='margin-bottom: 20px;'>
+                                <label class="mb-3" style='color: #fff;'>金額</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group" style='margin-bottom: 30px;'>
+                                <label class="mb-3" style='color: #fff;'>密碼</label>
+                                <input
+                                        type="password"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="centerFlex">
+                                <div class="btn">確認送出</div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="panel">
+                        <form>
+                            <div class="form-group" style="margin-bottom: 20px;">
+                                <label class="mb-3" style="color: #fff;">銀行</label>
+
+                                <select class="form-control" name="w_ply_bank">
+                                    <option value="0">-- 請選擇 --</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group" style='margin-bottom: 20px;'>
+                                <label class="mb-3" style='color: #fff;'>銀行戶名</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="form-group" style='margin-bottom: 20px;'>
+                                <label class="mb-3" style='color: #fff;'>銀行帳號</label>
+                                <input
+                                        type="text"
+                                        class="form-control"
+                                />
+                            </div>
+
+                            <div class="centerFlex">
+                                <div class="btn">確認送出</div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="Assets/js/vendor.min.js"></script>
     <script src="Assets/js/elephant.min.js?v=2"></script>
     <script src="Assets/js/landing-page.min.js"></script>
@@ -1543,6 +1979,83 @@
 
     <script src="/mobile/Assets/js/layer/layer.js"></script>
     <script type="text/javascript" src="Assets/js/jquery.cookie.js"></script>
+    <script>
+
+        const depositBtn = document.getElementById('deposit');
+        const modal = document.getElementById('modal');
+        const close = document.getElementById('close');
+        depositBtn.addEventListener('click',()=>modal.classList.add('show-modal'));
+        close.addEventListener('click',()=>modal.classList.remove('show-modal'));
+        (function () {
+          let lastTab = 0;
+
+          $('#depositModal').each(function () {
+            let $tabList = $(this).find('.depositNav'),
+              $tabAnchors = $tabList.find('.depositTab'),
+              $tabPanels = $(this).find('.panel');
+
+            $tabAnchors.each(function (currentTab,obj) {
+              $(obj).on('click', function (e) {
+                e.preventDefault();
+                // console.log($tabPanels.eq(currentTab));
+                $tabPanels.eq(lastTab).css({display: 'none'});
+                $tabPanels.eq(currentTab).css({display: 'block'});
+                lastTab = currentTab;
+
+                // Add active class to the tab which was clicked!!
+                let $this = $(obj);
+                // console.log($this.attr('href'));
+                if($this.hasClass('active')) {
+                  return;
+                }
+
+                $tabAnchors.removeClass('active');
+                $this.addClass('active');
+
+              });
+            });
+
+
+            $tabAnchors.eq(0).trigger('click');
+          });
+        })();
+
+        $(function () {
+          const state= {
+            lastPanelTab:0
+          };
+          $('#depositPanel').each(function () {
+            let $panelTabList = $(this).find('.panelNav'),
+              $panelTabAnchors = $panelTabList.find('.panelNav__tab'),
+              $boxes = $(this).find('.box');
+
+            $panelTabAnchors.each(function (currentTab,obj) {
+              $(obj).on('click', function (e) {
+                e.preventDefault();
+                // console.log($tabPanels.eq(currentTab));
+                $boxes.eq(state.lastPanelTab).css({display: 'none'});
+                $boxes.eq(currentTab).css({display: 'block'});
+                state.lastPanelTab = currentTab;
+
+                // Add active class to the tab which was clicked!!
+                let $this = $(obj);
+                // console.log($this.attr('href'));
+                if($this.hasClass('active')) {
+                  return;
+                }
+
+                $panelTabAnchors.removeClass('active');
+                $this.addClass('active');
+
+              });
+            });
+
+
+            $panelTabAnchors.eq(0).trigger('click');
+          });
+
+        });
+    </script>
 </body>
 
 </html>
