@@ -639,6 +639,11 @@
             width: 90%;
         }
 
+        .modalWindow--MUI {
+            max-width: 600px;
+            max-height: 490px;
+        }
+
         .modalWindow__header {
             display: flex;
             justify-content: center;
@@ -741,11 +746,11 @@
             display: none;
         }
 
-        .panelGroup .panel form .btn-group {
+        form .btn-group {
             display: flex;
         }
 
-        .panelGroup .panel form .btn-group .btn {
+        form .btn-group .btn {
             flex: 1 1 auto;
             padding: 10px;
             font-size: 1.5rem;
@@ -806,9 +811,9 @@
             width: 100%;
         }
 
-        .boxesGroup .box form .btn {
-            margin: 0 auto;
-            text-align: center;
+        .centerFlex .btn {
+            margin: 30px auto;
+            font-size: 1.5rem;
         }
 
         .boxesGroup .box form .centerFlex {
@@ -818,6 +823,12 @@
         }
 
         .panel form .centerFlex {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        form .centerFlex {
             width: 100%;
             display: flex;
             justify-content: center;
@@ -998,7 +1009,7 @@
         <div class="row row2">
             <div class="loginedPanel">
                 <div class="mainFunc">
-                        <span class='iconfont icon_coins-light'>
+                        <span class='iconfont icon_coins-light' id="turnOver">
                             <div class='iconName' style='left:-20%;'>各廳流水</div>
                         </span>
                     <span class='iconfont icon_sack-dollar-light' id='deposit'>
@@ -1010,10 +1021,10 @@
                     <span class='iconfont icon_file-invoice-dollar-light' id="transactionRecords">
                             <div class='iconName' style='left:-22%;'>交易記錄</div>
                         </span>
-                    <span class='iconfont icon_user-alt-light'>
+                    <span class='iconfont icon_user-alt-light' id="modifyUserInfo">
                             <div class='iconName' style='left:-22%;'>變更資料</div>
                         </span>
-                    <span class='iconfont icon_key-light'>
+                    <span class='iconfont icon_key-light' id="changePassword">
                             <div class='iconName' style='left:-15%;'>更改密碼</div>
                         </span>
                 </div>
@@ -2017,6 +2028,108 @@
 <button id="btnPopupOpener" style="display: none"></button>
 
 <!-- Modal -->
+<div class="modal-container" id="modalModifyUserInfo">
+    <div class="modalWindow modalWindow--MUI">
+        <div class="close-btn" id="closeModifyUserInfo">
+            <span class="iconfont icon_times-light"></span>
+        </div>
+        <div class="modalWindow__header">
+            <h3>變更資料</h3>
+        </div>
+        <div class="modalWindow__content">
+            <form>
+                <div class="form-group" style='margin-bottom: 30px;'>
+                    <label class="mb-3" style='color: #fff;'>用戶名</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            placeholder="TestN"
+                            style="pointer-events: none"
+                    />
+                </div>
+
+                <div class="form-group" style='margin-bottom: 30px;'>
+                    <label class="mb-3" style='color: #fff;'>手機號碼</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            style="pointer-events: none"
+                    />
+                </div>
+
+                <div class="form-group" style='margin-bottom: 30px;'>
+                    <label class="mb-3" style='color: #fff;'>LineID</label>
+                    <input
+                            type="text"
+                            class="form-control"
+                            style="pointer-events: none"
+                    />
+                </div>
+
+                <div class="form-group" style='margin-bottom: 30px;'>
+                    <label class="mb-3" style='color: #fff;'>LineID</label>
+                    <div style="font-size: 1.5rem;display:flex;align-items: center;justify-content: space-between">
+                        <span class="iconfont icon_hand-point-right-light" style="font-size: 3.5rem;"></span>
+                        ＊＊＊＊＊＊＊＊＊修改請洽客服＊＊＊＊＊＊＊＊＊
+                        <div type="button" class="btn"
+                             style="padding: 10px;font-size: 1.5rem;font-weight: 400;">
+                            前往
+                        </div>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal-container show-modal" id="modalChangePassword">
+    <div class="modalWindow modalWindow--MUI">
+        <div class="close-btn" id="closeChangePassword">
+            <span class="iconfont icon_times-light"></span>
+        </div>
+        <div class="modalWindow__header">
+            <h3>更改密碼</h3>
+        </div>
+        <div class="modalWindow__content">
+            <form>
+                <div class="form-group" style='margin-bottom: 30px;'>
+                    <label class="mb-3" style='color: #fff;'>舊密碼</label>
+                    <input
+                            type="password"
+                            class="form-control"
+                    />
+                </div>
+
+                <div class="form-group" style='margin-bottom: 30px;'>
+                    <label class="mb-3" style='color: #fff;'>新密碼</label>
+                    <input
+                            type="password"
+                            class="form-control"
+                    />
+                </div>
+
+                <div class="form-group" style='margin-bottom: 30px;'>
+                    <label class="mb-3" style='color: #fff;'>確認密碼</label>
+                    <input
+                            type="password"
+                            class="form-control"
+                    />
+                </div>
+
+                <div class="centerFlex">
+                    <div type="button" class="btn"
+                         style="padding: 10px;font-size: 1.5rem;font-weight: 400;">
+                        重置密碼
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="modal-container" id="modal">
     <div class="modalWindow">
         <div class="close-btn" id="close">
@@ -2691,6 +2804,69 @@
     </div>
 </div>
 
+<div class="modal-container" id="modalTurnOver">
+    <div class="modalWindow">
+        <div class="close-btn" id="closeTurnOver">
+            <span class="iconfont icon_times-light"></span>
+        </div>
+        <div class="modalWindow__header">
+            <h3>各廳流水</h3>
+        </div>
+        <div class="modalWindow__content">
+            <form>
+                <div class="form-group">
+                    <label class="mb-3" style="display: block;color: white;"
+                    >開始時間</label
+                    >
+                    <input
+                            type="text"
+                            id="datetimeFrom1"
+                            autocomplete="off"
+                            runat="server"
+                            class="form-control cursor mb-3"
+                    />
+                </div>
+                <div class="form-group">
+                    <label class="mb-3" style="display: block;color: white;"
+                    >結束時間</label
+                    >
+                    <input
+                            type="text"
+                            id="datetimeFrom2"
+                            autocomplete="off"
+                            runat="server"
+                            class="form-control cursor mb-3"
+                    />
+                </div>
+                <div
+                        class="btn-group"
+                        style="margin-top: 30px;"
+                        role="group"
+                >
+                    <button type="button" class="btn">今日</button>
+                    <button type="button" class="btn">昨日</button>
+                    <button type="button" class="btn">本週</button>
+                    <button type="button" class="btn">上週</button>
+                </div>
+
+                <div class="centerFlex" style="margin-top: 30px;margin-bottom: 30px;">
+                    <div type="button" class="btn"
+                         style="width: 100%;padding: 10px;font-size: 2rem;font-weight: 400;">
+                        搜尋
+                    </div>
+                </div>
+            </form>
+
+            <div
+                    class="itemContainer itemContainer__norecords"
+                    style="height: 48px"
+            >
+                尚無任何記錄
+            </div>
+        </div>
+    </div>
+</div>
+
 <script src="Assets/js/vendor.min.js"></script>
 <script src="Assets/js/elephant.min.js?v=2"></script>
 <script src="Assets/js/landing-page.min.js"></script>
@@ -2716,14 +2892,29 @@
 
   const depositBtn = document.getElementById('deposit');
   const transactionBtn = document.getElementById('transactionRecords');
+  const turnOverBtn = document.getElementById('turnOver');
+  const modifyUserInfoBtn = document.getElementById('modifyUserInfo');
+  const changePasswordBtn = document.getElementById('changePassword');
   const modal = document.getElementById('modal');
   const modal_transaction = document.getElementById('modalTransaction');
+  const modal_turnOver = document.getElementById('modalTurnOver');
+  const modal_modifyUserInfo = document.getElementById('modalModifyUserInfo');
+  const modal_changePassword = document.getElementById('modalChangePassword');
   const close = document.getElementById('close');
   const close_transaction = document.getElementById('closeTransaction');
+  const close_turnOver = document.getElementById('closeTurnOver');
+  const close_modifyUserInfo = document.getElementById('closeModifyUserInfo');
+  const close_changePassword = document.getElementById('closeChangePassword');
   depositBtn.addEventListener('click', () => modal.classList.add('show-modal'));
   transactionBtn.addEventListener('click', () => modal_transaction.classList.add('show-modal'));
+  turnOverBtn.addEventListener('click', () => modal_turnOver.classList.add('show-modal'));
+  modifyUserInfoBtn.addEventListener('click', () => modal_modifyUserInfo.classList.add('show-modal'));
+  changePasswordBtn.addEventListener('click', () => modal_changePassword.classList.add('show-modal'));
   close.addEventListener('click', () => modal.classList.remove('show-modal'));
   close_transaction.addEventListener('click', () => modal_transaction.classList.remove('show-modal'));
+  close_turnOver.addEventListener('click', () => modal_turnOver.classList.remove('show-modal'));
+  close_modifyUserInfo.addEventListener('click', () => modal_modifyUserInfo.classList.remove('show-modal'));
+  close_changePassword.addEventListener('click', () => modal_changePassword.classList.remove('show-modal'));
   // deposit & withdraw modal
   (function () {
     let lastTab = 0;
