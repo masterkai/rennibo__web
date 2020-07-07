@@ -83,6 +83,8 @@
     <link rel="stylesheet" href="Assets/Gold/css/Lang/zh-CHT/addon.css?v=3.9">
     <link rel="stylesheet" href="Assets/Gold/css/addon.css?v=1.4">
     <link rel="stylesheet" href="Assets/Gold/css/downloadbox.css">
+    <link rel="stylesheet" href="Assets/css/tooltipster.bundle.min.css"/>
+    <link rel="stylesheet" href="Assets/css/tooltipster-sideTip-borderless.min.css"/>
     <script type="text/javascript" src="Assets/js/formvalidation.js"></script>
     <script type="text/javascript" src="Assets/js/pages/settings.js?v=1.2"></script>
 
@@ -535,10 +537,13 @@
             align-items: center;
         }
 
+        .mainFunc span, .iconName {
+            color: #fff;
+        }
+
         .mainFunc span {
             position: relative;
             font-size: 2.4rem;
-            color: #fff;
             cursor: pointer;
             transform: translateY(-6px)
         }
@@ -547,7 +552,6 @@
             position: absolute;
             white-space: nowrap;
             font-size: .85rem;
-            color: #fff;
         }
 
         .user {
@@ -588,11 +592,23 @@
             letter-spacing: -3px;
         }
 
-        .btn {
+        .renniboBtn {
+            cursor: pointer;
+            padding: 5px 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
             background: linear-gradient(180deg, rgba(251, 220, 94, 1) 0%, rgba(214, 162, 65, 1) 100%);
             color: #231F20;
             font-weight: 700;
             font-size: 1.25rem;
+        }
+
+        .renniboBtn:hover {
+            background: linear-gradient(180deg, rgba(236, 236, 236, 1) 0%, rgba(149, 149, 149, 1) 100%);
         }
 
         .loginedPanel .item {
@@ -721,7 +737,7 @@
             border-bottom: 2px solid white;
         }
 
-        .depositTab .btn {
+        .depositTab .renniboBtn {
             width: 100%;
             font-size: 1.5rem;
             font-weight: 400;
@@ -736,7 +752,7 @@
             border-bottom: 2px solid white;
         }
 
-        .transactionTab .btn {
+        .transactionTab .renniboBtn {
             width: 100%;
             font-size: 1.5rem;
             font-weight: 400;
@@ -750,11 +766,31 @@
             display: flex;
         }
 
-        form .btn-group .btn {
+        form .btn-group .renniboBtn {
+            -webkit-border-radius: 0;
+            -moz-border-radius: 0;
+            border-radius: 0;
+            background: linear-gradient(180deg, rgba(236, 236, 236, 1) 0%, rgba(149, 149, 149, 1) 100%);
             flex: 1 1 auto;
             padding: 10px;
             font-size: 1.5rem;
             font-weight: 400;
+        }
+
+        form .btn-group .renniboBtn:first-child {
+            -webkit-border-radius: 5px 0 0 5px;
+            -moz-border-radius: 5px 0 0 5px;
+            border-radius: 5px 0 0 5px;
+        }
+
+        form .btn-group .renniboBtn:last-child {
+            -webkit-border-radius: 0 5px 5px 0;
+            -moz-border-radius: 0 5px 5px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        form .btn-group .renniboBtn:hover {
+            background: linear-gradient(180deg, rgba(251, 220, 94, 1) 0%, rgba(214, 162, 65, 1) 100%);
         }
 
         .panelGroup .panel:first-child {
@@ -811,7 +847,7 @@
             width: 100%;
         }
 
-        .centerFlex .btn {
+        .centerFlex .renniboBtn {
             margin: 30px auto;
             font-size: 1.5rem;
         }
@@ -1009,22 +1045,22 @@
         <div class="row row2">
             <div class="loginedPanel">
                 <div class="mainFunc">
-                        <span class='iconfont icon_coins-light' id="turnOver">
+                        <span class='tip iconfont icon_coins-light' id="turnOver" title="各廳流水">
                             <div class='iconName' style='left:-20%;'>各廳流水</div>
                         </span>
-                    <span class='iconfont icon_sack-dollar-light' id='deposit'>
+                    <span class='tip iconfont icon_sack-dollar-light' id='deposit' title="存/提款">
                             <div class='iconName' style='left:-12%;'>存/提款</div>
                         </span>
-                    <span class='iconfont icon_e-wallet'>
+                    <span class='tip iconfont icon_e-wallet' title="平台轉帳">
                             <div class='iconName' style='left:-21%;'>平台轉帳</div>
                         </span>
-                    <span class='iconfont icon_file-invoice-dollar-light' id="transactionRecords">
+                    <span class='tip iconfont icon_file-invoice-dollar-light' id="transactionRecords" title="交易記錄">
                             <div class='iconName' style='left:-22%;'>交易記錄</div>
                         </span>
-                    <span class='iconfont icon_user-alt-light' id="modifyUserInfo">
+                    <span class='tip iconfont icon_user-alt-light' id="modifyUserInfo" title="變更資料">
                             <div class='iconName' style='left:-22%;'>變更資料</div>
                         </span>
-                    <span class='iconfont icon_key-light' id="changePassword">
+                    <span class='tip iconfont icon_key-light' id="changePassword" title="更改密碼">
                             <div class='iconName' style='left:-15%;'>更改密碼</div>
                         </span>
                 </div>
@@ -1044,7 +1080,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="btn">登出</div>
+                <div class="renniboBtn">登出</div>
                 <div class="item">
                     <div><a>App下載</a></div>
                     <div><a>常見問題</a></div>
@@ -2071,7 +2107,7 @@
                     <div style="font-size: 1.5rem;display:flex;align-items: center;justify-content: space-between">
                         <span class="iconfont icon_hand-point-right-light" style="font-size: 3.5rem;"></span>
                         ＊＊＊＊＊＊＊＊＊修改請洽客服＊＊＊＊＊＊＊＊＊
-                        <div type="button" class="btn"
+                        <div type="button" class="renniboBtn"
                              style="padding: 10px;font-size: 1.5rem;font-weight: 400;">
                             前往
                         </div>
@@ -2084,7 +2120,7 @@
     </div>
 </div>
 
-<div class="modal-container show-modal" id="modalChangePassword">
+<div class="modal-container" id="modalChangePassword">
     <div class="modalWindow modalWindow--MUI">
         <div class="close-btn" id="closeChangePassword">
             <span class="iconfont icon_times-light"></span>
@@ -2119,7 +2155,7 @@
                 </div>
 
                 <div class="centerFlex">
-                    <div type="button" class="btn"
+                    <div type="button" class="renniboBtn"
                          style="padding: 10px;font-size: 1.5rem;font-weight: 400;">
                         重置密碼
                     </div>
@@ -2141,13 +2177,13 @@
         <div class="modalWindow__content" id="depositModal">
             <div class="depositNav">
                 <div class="depositTab active">
-                    <div class="btn">存款</div>
+                    <div class="renniboBtn">存款</div>
                 </div>
                 <div class="depositTab">
-                    <div class="btn">提款</div>
+                    <div class="renniboBtn">提款</div>
                 </div>
                 <div class="depositTab">
-                    <div class="btn">綁定銀行帳戶</div>
+                    <div class="renniboBtn">綁定銀行帳戶</div>
                 </div>
             </div>
             <div class="panelGroup">
@@ -2190,7 +2226,7 @@
                                     </select>
                                 </div>
                                 <div class="centerFlex">
-                                    <div class="btn">確認送出</div>
+                                    <div class="renniboBtn">確認送出</div>
                                 </div>
                                 <div class="centerFlex">
                                     <p class="white">★存款請使用本人銀行操作，若非本人而影響後續出款權益須自行承擔</p>
@@ -2227,7 +2263,7 @@
                                     </select>
                                 </div>
                                 <div class="centerFlex">
-                                    <div class="btn">確認送出</div>
+                                    <div class="renniboBtn">確認送出</div>
                                 </div>
                                 <div class="centerFlex">
                                     <p class="white">★存款請使用本人銀行操作，若非本人而影響後續出款權益須自行承擔</p>
@@ -2273,7 +2309,7 @@
                                     </select>
                                 </div>
                                 <div class="centerFlex">
-                                    <div class="btn">確認送出</div>
+                                    <div class="renniboBtn">確認送出</div>
                                 </div>
                                 <div class="centerFlex">
                                     <ul>注意事項：
@@ -2314,7 +2350,7 @@
                                     </select>
                                 </div>
                                 <div class="centerFlex">
-                                    <div class="btn">確認送出</div>
+                                    <div class="renniboBtn">確認送出</div>
                                 </div>
                                 <div class="centerFlex">
                                     <ul>注意事項：
@@ -2371,7 +2407,7 @@
                         </div>
 
                         <div class="centerFlex">
-                            <div class="btn">確認送出</div>
+                            <div class="renniboBtn">確認送出</div>
                         </div>
 
                     </form>
@@ -2403,7 +2439,7 @@
                         </div>
 
                         <div class="centerFlex">
-                            <div class="btn">確認送出</div>
+                            <div class="renniboBtn">確認送出</div>
                         </div>
 
                     </form>
@@ -2424,19 +2460,19 @@
         <div class="modalWindow__content" id="transactionModal">
             <div class="transactionNav">
                 <div class="transactionTab active">
-                    <div class="btn">存款</div>
+                    <div class="renniboBtn">存款</div>
                 </div>
                 <div class="transactionTab">
-                    <div class="btn">提款</div>
+                    <div class="renniboBtn">提款</div>
                 </div>
                 <div class="transactionTab">
-                    <div class="btn">轉點</div>
+                    <div class="renniboBtn">轉點</div>
                 </div>
                 <div class="transactionTab">
-                    <div class="btn">優惠</div>
+                    <div class="renniboBtn">優惠</div>
                 </div>
                 <div class="transactionTab">
-                    <div class="btn">下注</div>
+                    <div class="renniboBtn">下注</div>
                 </div>
             </div>
             <div class="panelGroup">
@@ -2471,14 +2507,14 @@
                                 style="margin-top: 30px;"
                                 role="group"
                         >
-                            <button type="button" class="btn">今日</button>
-                            <button type="button" class="btn">昨日</button>
-                            <button type="button" class="btn">本週</button>
-                            <button type="button" class="btn">上週</button>
+                            <div class="renniboBtn">今日</div>
+                            <div class="renniboBtn">昨日</div>
+                            <div class="renniboBtn">本週</div>
+                            <div class="renniboBtn">上週</div>
                         </div>
 
                         <div class="centerFlex" style="margin-top: 30px;margin-bottom: 30px;">
-                            <div type="button" class="btn"
+                            <div type="button" class="renniboBtn"
                                  style="width: 100%;padding: 10px;font-size: 2rem;font-weight: 400;">
                                 搜尋
                             </div>
@@ -2543,14 +2579,14 @@
                                 style="margin-top: 30px;"
                                 role="group"
                         >
-                            <button type="button" class="btn">今日</button>
-                            <button type="button" class="btn">昨日</button>
-                            <button type="button" class="btn">本週</button>
-                            <button type="button" class="btn">上週</button>
+                            <div class="renniboBtn">今日</div>
+                            <div class="renniboBtn">昨日</div>
+                            <div class="renniboBtn">本週</div>
+                            <div class="renniboBtn">上週</div>
                         </div>
 
                         <div class="centerFlex" style="margin-top: 30px;margin-bottom: 30px;">
-                            <div type="button" class="btn"
+                            <div type="button" class="renniboBtn"
                                  style="width: 100%;padding: 10px;font-size: 2rem;font-weight: 400;">
                                 搜尋
                             </div>
@@ -2615,14 +2651,14 @@
                                 style="margin-top: 30px;"
                                 role="group"
                         >
-                            <button type="button" class="btn">今日</button>
-                            <button type="button" class="btn">昨日</button>
-                            <button type="button" class="btn">本週</button>
-                            <button type="button" class="btn">上週</button>
+                            <div class="renniboBtn">今日</div>
+                            <div class="renniboBtn">昨日</div>
+                            <div class="renniboBtn">本週</div>
+                            <div class="renniboBtn">上週</div>
                         </div>
 
                         <div class="centerFlex" style="margin-top: 30px;margin-bottom: 30px;">
-                            <div type="button" class="btn"
+                            <div type="button" class="renniboBtn"
                                  style="width: 100%;padding: 10px;font-size: 2rem;font-weight: 400;">
                                 搜尋
                             </div>
@@ -2686,14 +2722,14 @@
                                 style="margin-top: 30px;"
                                 role="group"
                         >
-                            <button type="button" class="btn">今日</button>
-                            <button type="button" class="btn">昨日</button>
-                            <button type="button" class="btn">本週</button>
-                            <button type="button" class="btn">上週</button>
+                            <div class="renniboBtn">今日</div>
+                            <div class="renniboBtn">昨日</div>
+                            <div class="renniboBtn">本週</div>
+                            <div class="renniboBtn">上週</div>
                         </div>
 
                         <div class="centerFlex" style="margin-top: 30px;margin-bottom: 30px;">
-                            <div type="button" class="btn"
+                            <div type="button" class="renniboBtn"
                                  style="width: 100%;padding: 10px;font-size: 2rem;font-weight: 400;">
                                 搜尋
                             </div>
@@ -2759,14 +2795,14 @@
                                 style="margin-top: 30px;"
                                 role="group"
                         >
-                            <button type="button" class="btn">今日</button>
-                            <button type="button" class="btn">昨日</button>
-                            <button type="button" class="btn">本週</button>
-                            <button type="button" class="btn">上週</button>
+                            <div class="renniboBtn">今日</div>
+                            <div class="renniboBtn">昨日</div>
+                            <div class="renniboBtn">本週</div>
+                            <div class="renniboBtn">上週</div>
                         </div>
 
                         <div class="centerFlex" style="margin-top: 30px;margin-bottom: 30px;">
-                            <div type="button" class="btn"
+                            <div type="button" class="renniboBtn"
                                  style="width: 100%;padding: 10px;font-size: 2rem;font-weight: 400;">
                                 搜尋
                             </div>
@@ -2843,14 +2879,14 @@
                         style="margin-top: 30px;"
                         role="group"
                 >
-                    <button type="button" class="btn">今日</button>
-                    <button type="button" class="btn">昨日</button>
-                    <button type="button" class="btn">本週</button>
-                    <button type="button" class="btn">上週</button>
+                    <div class="renniboBtn">今日</div>
+                    <div class="renniboBtn">昨日</div>
+                    <div class="renniboBtn">本週</div>
+                    <div class="renniboBtn">上週</div>
                 </div>
 
                 <div class="centerFlex" style="margin-top: 30px;margin-bottom: 30px;">
-                    <div type="button" class="btn"
+                    <div type="button" class="renniboBtn"
                          style="width: 100%;padding: 10px;font-size: 2rem;font-weight: 400;">
                         搜尋
                     </div>
@@ -2875,6 +2911,7 @@
 
 <script type="text/javascript" src="Assets/js/jquery.min.js"></script>
 <script type="text/javascript" src="Assets/js/jquery-ui.custom.min.js"></script>
+<script src="Assets/js/tooltipster.bundle.min.js"></script>
 <script type="text/javascript" src="Assets/js/jshashtable-2.1.js"></script>
 <script type="text/javascript" src="Assets/js/jquery.numberformatter-1.2.3.min.js"></script>
 <script type="text/javascript" src="Assets/js/jackpot.js"></script>
@@ -3605,6 +3642,28 @@
       })
     })($)
   })
+  // mainFunc span hover effect
+  $(function () {
+    $('.mainFunc span').each((i, obj) => {
+      console.log($(obj));
+      $(obj).hover(
+        () => {
+          $(obj).css('color', '#ffdc00')
+          $(obj).children().css('color', '#ffdc00')
+        },
+        () => {
+          $(obj).css('color', '#ffffff')
+          $(obj).children().css('color', '#ffffff')
+        }
+      )
+    })
+  })
+  // tooltips
+  $(document).ready(function () {
+    $('.tip').tooltipster({
+      theme: 'tooltipster-borderless'
+    });
+  });
 </script>
 </body>
 
