@@ -3060,7 +3060,6 @@
   $(function () {
     (function ($) {
       const output = document.querySelector('.depositOutput');
-      const paginationOutput = document.querySelector('.bpos');
       const depositLists = {
         postPerPage: 5,
         currentPage: 1,
@@ -3088,8 +3087,7 @@
               depositLists.selected = parseInt(e.target.value)
             });
           }
-          paginationOutput.insertAdjacentElement('beforebegin', pageSelector)
-          // $('#depositRecords .pagination .cannotBeRemove:last-child').before(pageSelector)
+          $('#depositRecords .pagination .cannotBeRemove:last-child').before(pageSelector)
         }).catch(function (err) {
           console.log(err);
         });
@@ -3181,7 +3179,6 @@
   $(function () {
     (function ($) {
       const withdrawOutput = document.querySelector('.withdrawOutput');
-      const paginationOutput = document.querySelector('.bpos__withdraw');
       const withdrawLists = {
         postPerPage: 5,
         currentPage: 1,
@@ -3209,7 +3206,7 @@
               withdrawLists.selected = parseInt(e.target.value)
             });
           }
-          paginationOutput.insertAdjacentElement('beforebegin', pageSelector)
+          $('#withdrawRecords .pagination .cannotBeRemove:last-child').before(pageSelector)
         }).catch(function (err) {
           console.log(err);
         });
@@ -3232,7 +3229,7 @@
 
         for (let x = 0; x < totalPages; x++) {
           if (totalPages <= 1) {
-            $('#withdraw .pagination').css('display', 'none')
+            $('#withdrawRecords .pagination').css('display', 'none')
           }
         }
 
@@ -3266,7 +3263,7 @@
       window.addEventListener('load', function () {
         init();
       });
-      $('#withdraw .pagination li:last-child').click(function (e) {
+      $('#withdrawRecords .pagination li:last-child').click(function (e) {
         e.preventDefault();
 
         if (withdrawLists.selected === withdrawLists.optionsLength) {
@@ -3274,12 +3271,12 @@
         } else {
           withdrawLists.selected += 1;
           loadPage(withdrawLists.selected)
-          $('#withdraw .pagination select').val(withdrawLists.selected);
+          $('#withdrawRecords .pagination select').val(withdrawLists.selected);
         }
         // console.log('next clicked!');
         // console.log('current:', depositLists.selected);
       });
-      $('#withdraw .pagination li:first-child').click(function (e) {
+      $('#withdrawRecords .pagination li:first-child').click(function (e) {
         e.preventDefault();
 
         if (withdrawLists.selected === 1) {
@@ -3287,7 +3284,7 @@
         } else {
           withdrawLists.selected -= 1;
           loadPage(withdrawLists.selected)
-          $('#withdraw .pagination select').val(withdrawLists.selected);
+          $('#withdrawRecords .pagination select').val(withdrawLists.selected);
         }
         // console.log('prev clicked!');
         // console.log('current:', depositLists.selected);
