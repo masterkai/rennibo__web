@@ -684,6 +684,9 @@
             padding: 30px 60px;
 
         }
+        .modalWindow__content--SP {
+            padding: 30px;
+        }
 
         .modalWindow__content::-webkit-scrollbar {
             width: 12.34px;
@@ -2260,7 +2263,7 @@
     </div>
 </div>
 
-<div class="modal-container show-modal" id="modalSwitchPoints">
+<div class="modal-container" id="modalSwitchPoints">
     <div class="modalWindow modalWindow--SP">
         <div class="close-btn" id="closeSwitchPoints">
             <span class="iconfont icon_times-light"></span>
@@ -2268,7 +2271,7 @@
         <div class="modalWindow__header">
             <h3>平台轉帳</h3>
         </div>
-        <div class="modalWindow__content">
+        <div class="modalWindow__content modalWindow__content--SP">
             <div class="switchBox">
                 <div class="uiContainer">
                     <form>
@@ -3269,26 +3272,31 @@
 
   const depositBtn = document.getElementById('deposit');
   const transactionBtn = document.getElementById('transactionRecords');
+  const switchPointsBtn = document.getElementById('switchPoints');
   const turnOverBtn = document.getElementById('turnOver');
   const modifyUserInfoBtn = document.getElementById('modifyUserInfo');
   const changePasswordBtn = document.getElementById('changePassword');
   const modal = document.getElementById('modal');
   const modal_transaction = document.getElementById('modalTransaction');
+  const modal_switchPoints = document.getElementById('modalSwitchPoints');
   const modal_turnOver = document.getElementById('modalTurnOver');
   const modal_modifyUserInfo = document.getElementById('modalModifyUserInfo');
   const modal_changePassword = document.getElementById('modalChangePassword');
   const close = document.getElementById('close');
   const close_transaction = document.getElementById('closeTransaction');
+  const close_switchPoints = document.getElementById('closeSwitchPoints');
   const close_turnOver = document.getElementById('closeTurnOver');
   const close_modifyUserInfo = document.getElementById('closeModifyUserInfo');
   const close_changePassword = document.getElementById('closeChangePassword');
   depositBtn.addEventListener('click', () => modal.classList.add('show-modal'));
   transactionBtn.addEventListener('click', () => modal_transaction.classList.add('show-modal'));
+  switchPointsBtn.addEventListener('click', () => modal_switchPoints.classList.add('show-modal'));
   turnOverBtn.addEventListener('click', () => modal_turnOver.classList.add('show-modal'));
   modifyUserInfoBtn.addEventListener('click', () => modal_modifyUserInfo.classList.add('show-modal'));
   changePasswordBtn.addEventListener('click', () => modal_changePassword.classList.add('show-modal'));
   close.addEventListener('click', () => modal.classList.remove('show-modal'));
   close_transaction.addEventListener('click', () => modal_transaction.classList.remove('show-modal'));
+  close_switchPoints.addEventListener('click', () => modal_switchPoints.classList.remove('show-modal'));
   close_turnOver.addEventListener('click', () => modal_turnOver.classList.remove('show-modal'));
   close_modifyUserInfo.addEventListener('click', () => modal_modifyUserInfo.classList.remove('show-modal'));
   close_changePassword.addEventListener('click', () => modal_changePassword.classList.remove('show-modal'));
