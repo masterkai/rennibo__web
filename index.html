@@ -660,6 +660,10 @@
             max-height: 490px;
         }
 
+        .modalWindow--SP {
+            max-width: 800px;
+            max-height: 560px;
+        }
         .modalWindow__header {
             display: flex;
             justify-content: center;
@@ -1021,6 +1025,142 @@
         .dropDownBox .listItem span {
             color: #231F20;
         }
+        .switchBox {
+            /*border: 1px solid red;*/
+            display: flex;
+            justify-content: space-between;
+        }
+        .switchBox .uiContainer {
+            flex: 0 1 60%;
+            /*border: 1px solid #0044d7;*/
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .switchBox .uiContainer form {
+            /*border: 1px solid #d7cc00;*/
+            width: 100%;
+        }
+        .switchBox .uiContainer form .form-group {
+             margin-bottom: 1rem;
+         }
+        .switchBox .uiContainer form .form-group .col-sm-9 {
+            flex: 0 0 75%;
+            max-width: 75%;
+        }
+        .switchBox .uiContainer form .form-group .col-form-label {
+            padding-top: calc(.375rem + 1px);
+            padding-bottom: calc(.375rem + 1px);
+            margin-bottom: 0;
+            font-size: inherit;
+            line-height: 1.5;
+        }
+        .switchBox .uiContainer form .form-control-sm {
+            height: calc(1.5em + .5rem + 2px);
+            padding: .25rem .5rem;
+            font-size: .875rem;
+            line-height: 1.5;
+            border-radius: .2rem;
+        }
+        .switchBox .uiContainer form .form-control {
+            display: block;
+            width: 100%;
+            height: calc(1.5em + .75rem + 2px);
+            padding: .375rem .75rem;
+            font-size: 1rem;
+            font-weight: 400;
+            line-height: 1.5;
+            color: #495057;
+            background-color: #fff;
+            background-clip: padding-box;
+            border: 1px solid #ced4da;
+            border-radius: .25rem;
+            transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+        }
+        .switchBox .uiContainer form .row {
+            display: flex;
+            flex-wrap: wrap;
+            /*margin-right: -15px;*/
+            /*margin-left: -15px;*/
+        }
+        .switchBox .itemBox {
+            flex: 0 1 40%;
+            /*border: 1px solid #44ff00;*/
+            display: flex;
+            flex-direction: column;
+            margin: 15px 15px 15px 8px;
+            max-width: 323px;
+            max-height: 542px;
+            background-color: rgba(0, 0, 0, 0.75);
+            border-radius: 8px;
+        }
+        .switchBox .itemBox .headerBox {
+            height: 36px;
+            width: 100%;
+            display: flex;
+            border-bottom: 3px solid #0091FF;
+            margin-bottom: 10px;
+        }
+        .switchBox .itemBox .headerBox .name {
+            flex: 1 1 33.33%;
+            color: white;
+        }
+        .switchBox .itemBox .headerBox .surplus {
+            text-align: right;
+            flex: 1 1 33.33%;
+            color: white;
+        }
+        .switchBox .itemBox .headerBox span {
+            text-align: right;
+            flex: 1 1 10%;
+            color: #0091FF;
+        }
+        .switchBox .itemBox .listBox {
+            max-height: 300px;
+            overflow-y: scroll;
+        }
+
+        .switchBox .itemBox .listBox::-webkit-scrollbar {
+            width: 12.34px;
+        }
+
+        .switchBox .itemBox .listBox::-webkit-scrollbar-thumb {
+            background-color: #454543;
+            outline: #5f5f5f solid 1px;
+        }
+
+        .switchBox .itemBox .listBox::-webkit-scrollbar-track {
+            background-color: #151515;
+        }
+        .switchBox .itemBox .listContainer {
+            height: 32px;
+            width: 100%;
+            display: flex;
+        }
+        .switchBox .itemBox .listContainer .name {
+            flex: 1 1 33.33%;
+            color: white;
+        }
+        .switchBox .itemBox .listContainer .surplus {
+            text-align: right;
+            flex: 1 1 33.33%;
+            color: white;
+        }
+        .switchBox .itemBox .listContainer span {
+            text-align: right;
+            flex: 1 1 10%;
+            color: #0091FF;
+        }
+        .switchBox .itemBox .submitBtn {
+            background-image: linear-gradient(225deg, #2120E0 0%, #0081F7 100%);
+            color: #fff;
+            border: none;
+            width: 100%;
+            padding: 6px;
+            border-radius: 19px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -1051,7 +1191,7 @@
                     <span class='tip iconfont icon_sack-dollar-light' id='deposit' title="存/提款">
                             <div class='iconName' style='left:-12%;'>存/提款</div>
                         </span>
-                    <span class='tip iconfont icon_e-wallet' title="平台轉帳">
+                    <span class='tip iconfont icon_e-wallet' id="switchPoints" title="平台轉帳">
                             <div class='iconName' style='left:-21%;'>平台轉帳</div>
                         </span>
                     <span class='tip iconfont icon_file-invoice-dollar-light' id="transactionRecords" title="交易記錄">
@@ -2116,6 +2256,206 @@
                 </div>
 
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal-container show-modal" id="modalSwitchPoints">
+    <div class="modalWindow modalWindow--SP">
+        <div class="close-btn" id="closeSwitchPoints">
+            <span class="iconfont icon_times-light"></span>
+        </div>
+        <div class="modalWindow__header">
+            <h3>平台轉帳</h3>
+        </div>
+        <div class="modalWindow__content">
+            <div class="switchBox">
+                <div class="uiContainer">
+                    <form>
+                        <div class="form-group row">
+                            <label
+                                    for="inputPassword"
+                                    class="col-sm-3 col-form-label"
+                                    style="color: white"
+                            >從這轉帳</label
+                            >
+                            <div class="col-sm-9">
+                                <select class="form-control form-control-sm">
+                                    <option>— 請選擇 —</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                    for="inputPassword"
+                                    class="col-sm-3 col-form-label"
+                                    style="color: white"
+                            >轉帳去到</label
+                            >
+                            <div class="col-sm-9">
+                                <select class="form-control form-control-sm">
+                                    <option>— 請選擇 —</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label
+                                    for="inputPassword"
+                                    class="col-sm-3 col-form-label"
+                                    style="color: white"
+                            >轉帳金額</label
+                            >
+                            <div class="col-sm-9">
+                                <input
+                                        type="password"
+                                        class="form-control form-control-sm"
+                                        id="inputPassword"
+                                />
+                            </div>
+                        </div>
+                        <div class="centerFlex">
+                            <div class="renniboBtn">轉帳</div>
+                        </div>
+                    </form>
+                </div>
+                <div class="itemBox">
+                    <div class="headerBox">
+                        <div class="name">
+                            錢包
+                        </div>
+                        <div class="surplus">
+                            餘額
+                        </div>
+                        <span class="iconfont icon_transfer"></span>
+                    </div>
+                    <div class="listBox">
+                        <div class="listContainer">
+                            <div class="name">
+                                主錢包
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                DG百家樂
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                歐博
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                沙龍百家樂
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                WM百家樂
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                任你博體育
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                Super體育
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                AFB88
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                RTG天地
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                Betsoft
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                BTX
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                9K彩票
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                        <div class="listContainer">
+                            <div class="name">
+                                六合彩539
+                            </div>
+                            <div class="surplus">
+                                {d.value}
+                            </div>
+                            <span class="iconfont icon_transfer"></span>
+                        </div>
+                    </div>
+                    <button class="submitBtn">
+              <span
+                      style="margin-right: 10px"
+                      class="iconfont icon_transfer"
+              ></span>
+                        一鍵帶回
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
