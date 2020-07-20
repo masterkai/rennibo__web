@@ -1143,9 +1143,14 @@
             background-color: #151515;
         }
         .switchBox .itemBox .listContainer {
-            height: 32px;
+            height: 25px;
             width: 100%;
             display: flex;
+            border-bottom: 1px solid rgba(255, 255 ,255,0.25);
+            margin-bottom: 5px;
+        }
+        .switchBox .itemBox .listContainer:last-child {
+            border-bottom: unset;
         }
         .switchBox .itemBox .listContainer .name {
             flex: 1 1 33.33%;
