@@ -1188,10 +1188,87 @@
             border-radius: 19px;
             margin-top: 20px;
         }
+        .page-wrap {
+            position: relative;
+        }
+        .event-roulette {
+            cursor: pointer;
+            width: 50px;
+            position: fixed;
+            z-index: 999;
+            right: 0;
+            top: 600px;
+            float: right;
+        }
+        .event-slot {
+            cursor: pointer;
+            width: 50px;
+            position: fixed;
+            z-index: 999;
+            right: 0;
+            top: 700px;
+            float: right;
+        }
+        .event-roulette img,.event-slot img {
+            position: absolute;
+            z-index: 100;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .gotoRoulette .decoTip,.gotoSlot .decoTip {
+            position: absolute;
+            z-index: 112;
+            white-space: nowrap;
+            left: 19px;
+            top: -6px;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .gotoRoulette .decoTip {
+            text-shadow:
+                    5px 5px 0 #0091ff,
+                    -1px -1px 0 #0091ff,
+                    1px -1px 0 #0091ff,
+                    -1px 1px 0 #0091ff,
+                    1px 1px 0 #0091ff;
+        }
+
+        .gotoSlot .decoTip {
+            text-shadow:
+                    5px 5px 0 red,
+                    -1px -1px 0 red,
+                    1px -1px 0 red,
+                    -1px 1px 0 red,
+                    1px 1px 0 red;
+        }
+
+        .gotoRoulette, .gotoSlot {
+            position: absolute;
+            color: white;
+            font-size: 16px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,1);
+            border-radius: 50px 0 0 50px;
+            z-index: 10;
+            top: 50%;
+            right: -140px;
+            transform: translateY(-50%);
+            width: auto;
+            padding: 10px 56px 2px 20px;
+            white-space: nowrap;
+        }
+        .gotoRoulette {
+            background-color: #0091ff;
+        }
+        .gotoSlot {
+            background-color: red;
+        }
     </style>
 </head>
 
-<body>
+<div>
 <!-- Google Tag Manager (noscript) -->
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WQJVRHQ" height="0" width="0"
@@ -1200,6 +1277,18 @@
 <!-- End Google Tag Manager (noscript) -->
 
 <div id="loaderRefresh" class="loading" style="z-index: 999999999999;"></div>
+    <div class="page-wrap">
+        <div class="event-roulette">
+            <img src="./Assets/img/floating-roulette.png" alt="">
+            <div class="gotoRoulette">旋轉輪盤<div class="decoTip">立即前往</div></div>
+
+        </div>
+
+        <div class="event-slot">
+            <img src="./Assets/img/floating-slot.png" alt="">
+            <div class="gotoSlot">拉霸遊戲<div class="decoTip">立即前往</div></div>
+
+        </div>
 <!--header s-->
 <div class="row mytopbg07">
     <div class="mycontainer mycontainer02">
@@ -1655,24 +1744,7 @@
 </div>
 <!--news e-->
 
-<!--01 s-->
-<!--button class="btn btn-primary bottombut" data-toggle="modal" data-target="#infoModalAlertColored" type="button">
-    <img src="/web/Assets/Gold/img/ChatSupport1.png" style="width: 38px" alt="..">
-</!--button-->
 
-<!--contact s-->
-
-<!-- //\\
-
-<button class="btn btn-primary livechatbtn" data-toggle="modal" data-target="" type="button">
-    <a onclick="window.open('https://tawk.to/chat/5a125821198bd56b8c03c1da/default/?$_tawk_popout=true', 'popup_window', 'width=700,height=400,resizable=yes')">Chat Now</a>
-    <img src="/web/Assets/img/arrow.png" alt=".." >
-</button>
-
--->
-<!--contact e-->
-
-<!--line to index s-->
 
 
 <script src="Assets/js/RNB_RouletteAnim.js?1537259502424"></script>
@@ -2048,7 +2120,7 @@
     </div>
 </div>
 <!--3nd footer e-->
-
+</div>
 <!-- Modal Transfer SITE -->
 <div id="modalGame" style="display:none;">
     <div class="iziModal-header iziModal-noSubtitle" style="background: rgb(136, 160, 185); padding-right: 40px;">
@@ -4072,6 +4144,23 @@
       theme: 'tooltipster-borderless'
     });
   });
+  $(function () {
+    $('.event-roulette')
+      .mouseenter(()=>{
+      $(this).find('.gotoRoulette').stop().animate({right:'0px'})
+        })
+      .mouseleave(()=>{
+        $(this).find('.gotoRoulette').stop().animate({right:'-140px'})
+      })
+
+    $('.event-slot')
+      .mouseenter(()=>{
+        $(this).find('.gotoSlot').stop().animate({right:'0px'})
+      })
+      .mouseleave(()=>{
+        $(this).find('.gotoSlot').stop().animate({right:'-140px'})
+      })
+  })
 </script>
 </body>
 
