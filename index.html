@@ -1193,7 +1193,7 @@
         }
         .event-roulette {
             cursor: pointer;
-            width: 50px;
+            width: 80px;
             position: fixed;
             z-index: 999;
             right: 0;
@@ -1202,7 +1202,7 @@
         }
         .event-slot {
             cursor: pointer;
-            width: 50px;
+            width: 80px;
             position: fixed;
             z-index: 999;
             right: 0;
@@ -1253,10 +1253,10 @@
             border-radius: 50px 0 0 50px;
             z-index: 10;
             top: 50%;
-            right: -140px;
+            right: -200px;
             transform: translateY(-50%);
             width: auto;
-            padding: 10px 56px 2px 20px;
+            padding: 10px 95px 2px 20px;
             white-space: nowrap;
         }
         .gotoRoulette {
@@ -1279,13 +1279,13 @@
 <div id="loaderRefresh" class="loading" style="z-index: 999999999999;"></div>
     <div class="page-wrap">
         <div class="event-roulette">
-            <img src="./Assets/img/floating-roulette.png" alt="">
+            <img src="./Assets/img/floating-roulette-desktop.png" alt="">
             <div class="gotoRoulette">旋轉輪盤<div class="decoTip">立即前往</div></div>
 
         </div>
 
         <div class="event-slot">
-            <img src="./Assets/img/floating-slot.png" alt="">
+            <img src="./Assets/img/floating-slot-desktop.png" alt="">
             <div class="gotoSlot">拉霸遊戲<div class="decoTip">立即前往</div></div>
 
         </div>
@@ -4150,7 +4150,7 @@
       $(this).find('.gotoRoulette').stop().animate({right:'0px'})
         })
       .mouseleave(()=>{
-        $(this).find('.gotoRoulette').stop().animate({right:'-140px'})
+        $(this).find('.gotoRoulette').stop().animate({right:'-200px'})
       })
 
     $('.event-slot')
@@ -4158,7 +4158,7 @@
         $(this).find('.gotoSlot').stop().animate({right:'0px'})
       })
       .mouseleave(()=>{
-        $(this).find('.gotoSlot').stop().animate({right:'-140px'})
+        $(this).find('.gotoSlot').stop().animate({right:'-200px'})
       })
   })
 </script>
